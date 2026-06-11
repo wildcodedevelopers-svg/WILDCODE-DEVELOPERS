@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Wild Code builds high-performance, ultra-modern, responsive websites for brands, entrepreneurs, and creators. Elevate your digital presence today.">
     
+    <!-- Open Graph / Social Preview Metadata -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wildcode.co.za/">
     <meta property="og:title" content="Wild Code | Premium Web Development Studio">
     <meta property="og:description" content="Clean code. Stunning aesthetics. Elite performance. We build websites that dominate search results and maximize conversions.">
     <meta property="og:image" content="https://i.ibb.co/tw05khGn/1779331928462.png">
 
+    <!-- Search Verification -->
     <meta name="google-site-verification" content="A_7FE_Nvq47k6zbuhWZnyFJ-UxYtbaCT1uRiY_MfPVg" />
     <meta name="google-site-verification" content="90Olse0Gv2p7jjXHzbPtim0IYC_A9bGo-jSfBLe1IUg" />
     
+    <!-- Google Fonts for High-End Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -109,7 +112,7 @@
       h2 {
         font-family: var(--font-display);
         color: var(--accent);
-        font-size: 2.2rem;
+        font-size: 1.8rem;
         font-weight: 700;
         letter-spacing: 1px;
         text-transform: uppercase;
@@ -131,7 +134,7 @@
       h3 { 
         font-family: var(--font-display);
         color: #ffffff;
-        font-size: 1.5rem; 
+        font-size: 1.25rem; 
         margin-top: 40px;
         margin-bottom: 15px;
         display: flex;
@@ -141,8 +144,8 @@
       h3::before {
         content: '';
         display: inline-block;
-        width: 6px;
-        height: 20px;
+        width: 5px;
+        height: 16px;
         background: var(--primary);
         margin-right: 12px;
         border-radius: 4px;
@@ -501,6 +504,10 @@
 
       /* Mobile Phone Optimization Override */
       @media (max-width: 600px) {
+        h2 {
+          font-size: 1.4rem;
+          gap: 8px;
+        }
         .comm-dock {
           flex-direction: column;
           gap: 10px;
@@ -539,8 +546,10 @@
   </head>
   <body>
 
+    <!-- Cyber matrix overlay container -->
     <canvas id="matrixCanvas"></canvas>
     
+    <!-- Unified Layout Sized Logo Container -->
     <div class="section-card" style="padding: 0; border: none; background: none; box-shadow: none; margin-bottom: 20px;">
       <div class="logo-container">
         <img src="https://i.ibb.co/tw05khGn/1779331928462.png" alt="WildCode Elite Systems Logo">
@@ -727,6 +736,7 @@
 
       <div id="projectFormContainer">
         <form action="https://api.web3forms.com/submit" method="POST">
+          <!-- Web3Forms API Configuration -->
           <input type="hidden" name="access_key" value="51ade758-8182-4474-a2c8-84bd1fb60c0b">
           <input type="hidden" name="subject" value="New Elite Project Submission - WildCode">
           <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
