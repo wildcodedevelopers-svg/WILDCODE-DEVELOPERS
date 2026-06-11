@@ -6,18 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Wild Code builds high-performance, ultra-modern, responsive websites for brands, entrepreneurs, and creators. Elevate your digital presence today.">
     
-    <!-- Open Graph / Social Preview Metadata -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wildcode.co.za/">
     <meta property="og:title" content="Wild Code | Premium Web Development Studio">
     <meta property="og:description" content="Clean code. Stunning aesthetics. Elite performance. We build websites that dominate search results and maximize conversions.">
     <meta property="og:image" content="https://i.ibb.co/tw05khGn/1779331928462.png">
 
-    <!-- Search Verification -->
     <meta name="google-site-verification" content="A_7FE_Nvq47k6zbuhWZnyFJ-UxYtbaCT1uRiY_MfPVg" />
     <meta name="google-site-verification" content="90Olse0Gv2p7jjXHzbPtim0IYC_A9bGo-jSfBLe1IUg" />
     
-    <!-- Google Fonts for High-End Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -96,10 +93,10 @@
 
       .logo-container img {
         width: 100%;
-        max-width: 100%; /* Dynamically matches internal block width matching other images */
+        max-width: 100%;
         height: auto;
         border-radius: 14px;
-        mix-blend-mode: screen; /* Strips black backgrounds effortlessly */
+        mix-blend-mode: screen;
         filter: drop-shadow(0 0 20px rgba(0, 85, 255, 0.4));
         transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       }
@@ -467,14 +464,14 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: rgba(3, 7, 18, 0.65);
+        background: rgba(3, 7, 18, 0.75);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border-top: 1px solid rgba(255, 255, 255, 0.08);
         padding: 20px;
         display: flex;
         justify-content: center;
-        gap: 20px;
+        gap: 16px;
         z-index: 999;
         box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.6);
       }
@@ -483,8 +480,8 @@
         flex: 1;
         max-width: 200px;
         text-align: center;
-        padding: 16px 15px;
-        border-radius: 14px;
+        padding: 14px 15px;
+        border-radius: 12px;
         color: #fff;
         text-decoration: none;
         font-weight: 700;
@@ -501,6 +498,23 @@
       .btn-whatsapp { background-color: #1ea94b; box-shadow: 0 8px 20px rgba(30, 169, 75, 0.25); }
       .btn-call { background-color: #004fe5; box-shadow: 0 8px 20px rgba(0, 79, 229, 0.25); }
       .btn-mail { background-color: #ce2c3c; box-shadow: 0 8px 20px rgba(206, 44, 60, 0.25); }
+
+      /* Mobile Phone Optimization Override */
+      @media (max-width: 600px) {
+        .comm-dock {
+          flex-direction: column;
+          gap: 10px;
+          padding: 15px;
+        }
+        .comm-btn {
+          max-width: 100%;
+          padding: 12px 10px;
+          font-size: 0.95rem;
+        }
+        body {
+          padding-bottom: 240px;
+        }
+      }
 
       /* --- Studio Footer Architecture --- */
       footer {
@@ -525,10 +539,8 @@
   </head>
   <body>
 
-    <!-- Cyber matrix overlay container -->
     <canvas id="matrixCanvas"></canvas>
     
-    <!-- Unified Layout Sized Logo Container -->
     <div class="section-card" style="padding: 0; border: none; background: none; box-shadow: none; margin-bottom: 20px;">
       <div class="logo-container">
         <img src="https://i.ibb.co/tw05khGn/1779331928462.png" alt="WildCode Elite Systems Logo">
@@ -715,7 +727,6 @@
 
       <div id="projectFormContainer">
         <form action="https://api.web3forms.com/submit" method="POST">
-          <!-- Web3Forms API Configuration -->
           <input type="hidden" name="access_key" value="51ade758-8182-4474-a2c8-84bd1fb60c0b">
           <input type="hidden" name="subject" value="New Elite Project Submission - WildCode">
           <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
