@@ -58,9 +58,37 @@
         width: 100vw;
         height: 100vh;
         z-index: -1;
-        opacity: 0.12;
+        opacity: 0.35;
         pointer-events: none;
         content-visibility: auto;
+      }
+
+      .hero-section {
+        margin: 0 auto 60px auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .shifting-hero-text {
+        text-align: center;
+        font-size: 3rem;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-family: var(--font-display);
+        animation: colorShift 6s ease-in-out infinite alternate;
+      }
+
+      @keyframes colorShift {
+        0% {
+          color: var(--accent);
+          text-shadow: 0 0 20px var(--accent-glow);
+        }
+        100% {
+          color: var(--primary);
+          text-shadow: 0 0 20px var(--primary-glow);
+        }
       }
 
       .section-card {
@@ -73,6 +101,8 @@
         -webkit-backdrop-filter: blur(16px);
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
         transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        z-index: 2;
       }
 
       .section-card:hover {
@@ -82,23 +112,30 @@
 
       .logo-container {
         text-align: center;
-        margin: 40px 0 60px 0;
+        margin: 40px 0 30px 0;
         display: flex;
         justify-content: center;
+        position: relative;
+        z-index: 2;
       }
 
       .logo-container img {
         width: 100%;
-        max-width: 650px; /* Scaled up from 450px */
+        max-width: 650px;
         height: auto;
         border-radius: 14px;
-        mix-blend-mode: screen; /* Drops out dark background values */
-        filter: contrast(1.25) brightness(1.1) drop-shadow(0 0 25px rgba(0, 85, 255, 0.25)); /* Strips muddy colors, pops foreground */
+        mix-blend-mode: screen;
+        filter: contrast(1.25) brightness(1.1) drop-shadow(0 0 25px rgba(0, 85, 255, 0.25));
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       .logo-container:hover img {
         transform: scale(1.02);
+      }
+
+      h1 {
+        font-family: var(--font-display);
+        color: #ffffff;
       }
 
       h2 {
@@ -239,10 +276,6 @@
         gap: 30px;
         list-style: none;
       }
-
-      @media (max-width: 480px) {
-        .project-grid { grid-template-columns: 1fr; }
-      }
       
       .project-card {
         background: rgba(255, 255, 255, 0.01);
@@ -265,6 +298,54 @@
         display: block;
         margin-bottom: 12px;
         letter-spacing: 0.5px;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+      }
+
+      .testimonial-card {
+        background: rgba(255, 255, 255, 0.01);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        border-left: 3px solid var(--accent);
+        padding: 28px;
+        border-radius: 16px;
+        transition: transform 0.3s ease, border-color 0.3s ease;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(0, 85, 255, 0.3);
+      }
+
+      .testimonial-quote {
+        color: var(--text-main);
+        font-size: 1.05rem;
+        font-style: italic;
+        margin-bottom: 20px;
+        line-height: 1.6;
+        position: relative;
+      }
+
+      .testimonial-meta {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .testimonial-name {
+        font-family: var(--font-display);
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 1.1rem;
+      }
+
+      .testimonial-company {
+        color: var(--accent);
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-top: 2px;
       }
 
       .faq-wrapper {
@@ -305,6 +386,7 @@
         transform: rotate(45deg);
         transition: transform 0.2s ease;
         margin-right: 5px;
+        flex-shrink: 0;
       }
 
       .faq-item.active .faq-icon {
@@ -350,6 +432,8 @@
         box-shadow: 0 10px 30px rgba(0, 255, 204, 0.25);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         letter-spacing: 0.5px;
+        position: relative;
+        z-index: 10;
       }
 
       #formToggleBtn:hover {
@@ -472,6 +556,12 @@
         .comm-dock { width: calc(100% - 40px); justify-content: space-between; padding: 10px 20px; }
       }
 
+      @media (max-width: 480px) {
+        .project-grid { grid-template-columns: 1fr; }
+        .testimonials-grid { grid-template-columns: 1fr; }
+        .shifting-hero-text { font-size: 2.2rem !important; }
+      }
+
       footer {
         text-align: center;
         padding: 60px 0;
@@ -499,66 +589,75 @@
     <div class="logo-container">
       <img src="https://i.ibb.co/tw05khGn/1779331928462.png" alt="WildCode Elite Systems Logo" width="650" height="216">
     </div>
+
+    <div class="hero-section">
+      <h1 class="shifting-hero-text">
+        Websites That Grow Businesses
+      </h1>
+      <p style="text-align:center;max-width:700px;margin:auto;color:#94a3b8;font-size:1.15rem;">
+        Professional websites designed to attract customers, build credibility, and help your business grow online.
+      </p>
+    </div>
     
     <div class="section-card">
       <h2>ABOUT WILDCODE</h2>
       <div class="img-wrapper">
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/hRTKv85G/istockphoto-1435220822-612x612.jpg" alt="Production Lab" class="lazy-load">
       </div>
-      <p><b>WildCode</b> is an elite web development studio dedicated to engineering high-performance, visually commanding digital platforms for progressive enterprises, innovators, and creators. We combine meticulous architectural engineering with futuristic aesthetics to yield digital environments that execute seamlessly across the matrix of modern screen resolutions.</p>
+      <p><b>WildCode</b> builds modern, high-performance websites for businesses, entrepreneurs, and creators. We combine clean design, fast performance, and mobile-friendly development to help brands build trust, attract customers, and grow online. Whether you need a business website, landing page, portfolio, or online store, we create digital experiences that look professional and deliver results.</p>
     </div>
     
     <div class="section-card services-group">
-      <h2>ENGINEERING CAPABILITIES</h2>
+      <h2>OUR SERVICES</h2>
       
       <div class="service-block">
-        <h3>UI/UX Architecture</h3>
+        <h3>Modern Website Design</h3>
         <div class="img-wrapper">
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/SXsZ7yBy/web-designing-1024x683.jpg" alt="UI Design" class="lazy-load">
         </div>
-        <p>We craft bespoke, immersive user interfaces mapped explicitly to match your operational conversion parameters and corporate aesthetic guidelines.</p>
+        <p>We create beautiful, user-friendly websites that reflect your brand and provide a smooth experience for your visitors.</p>
       </div>
       
       <div class="service-block">
-        <h3>Responsive Infrastructure</h3>
+        <h3>Mobile-Friendly Development</h3>
         <div class="img-wrapper">
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/FL65PcWs/A-Complete-Guide-to-Responsive-Web-Development-in-2023-2.jpg" alt="Responsive Build" class="lazy-load">
         </div>
-        <p>Engineered to adapt flawlessly across structural variables including mobile nodes, tablets, standard desktop screens, and wide-format monitors.</p>
+        <p>Every website is fully responsive and works perfectly on phones, tablets, laptops, and desktop computers.</p>
       </div>
       
       <div class="service-block">
-        <h3>Conversion Landing Matrices</h3>
+        <h3>Landing Pages That Convert</h3>
         <div class="img-wrapper">
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/S1Jkqrx/Landing-Page-Examples.png" alt="Landing Matrices" class="lazy-load">
         </div>
-        <p>Precision single-page execution structures optimized to command attention and transform raw traffic protocols into dedicated customer acquisitions.</p>
+        <p>We build focused landing pages designed to turn visitors into customers, helping you generate more leads and sales.</p>
       </div>
 
       <div class="service-block">
-        <h3>Enterprise Business Nodes</h3>
+        <h3>Business Websites</h3>
         <div class="img-wrapper">
           <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/Kp1tWSym/Creating-Visually-Stunning-and-Functional-Business-Websites.jpg" alt="Business Portals" class="lazy-load">
         </div>
-        <p>Highly robust corporate configurations deployed to consolidate professional prestige and scale computational structures cleanly.</p>
+        <p>Professional websites that help businesses build credibility, showcase services, and attract new customers.</p>
       </div>
        
       <hr>
       
-      <h4>Core Strategic Advantages</h4>
+      <h4>Why Choose WildCode</h4>
       <div class="feature-list">
-        <div class="feature-item"><span>✔</span> Modern &amp; Clean Layout Architecture</div>
-        <div class="feature-item"><span>✔</span> Adaptive Cross-Platform Interface</div>
-        <div class="feature-item"><span>✔</span> Optimized Runtime Core Performance</div>
-        <div class="feature-item"><span>✔</span> Transparent Value-Driven Investment</div>
-        <div class="feature-item"><span>✔</span> Direct High-Tier Engineering Support</div>
-        <div class="feature-item"><span>✔</span> Scalable Multi-Phase Growth Node</div>
+        <div class="feature-item"><span>✔</span> Modern Professional Design</div>
+        <div class="feature-item"><span>✔</span> Mobile-Friendly Layouts</div>
+        <div class="feature-item"><span>✔</span> Fast Loading Speeds</div>
+        <div class="feature-item"><span>✔</span> SEO Ready Structure</div>
+        <div class="feature-item"><span>✔</span> Affordable Pricing</div>
+        <div class="feature-item"><span>✔</span> Direct Support</div>
       </div>
     </div>
     
     <div class="section-card">
-      <h2>ACTIVE DEPLOYMENTS</h2>
-      <p>Examine a selection of production environments engineered to maximize commercial visibility.</p>
+      <h2>OUR WORK</h2>
+      <p>Here are some examples of websites designed and developed by WildCode.</p>
       
       <ul class="project-grid">
         <li class="project-card">
@@ -589,28 +688,114 @@
     </div>
 
     <div class="section-card">
+      <h2>CLIENT TESTIMONIALS</h2>
+      <p>What business owners say about partnering with WildCode.</p>
+      <div class="testimonials-grid">
+        <!-- New Smartie Pants Testimonial -->
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"WildCode built an incredible custom platform for our learning center. The site structure, navigation, and specific brand colors look highly professional and match our vision perfectly. Our parents love the new interface."</p>
+          <div class="testimonial-meta">
+            <span class="testimonial-name">Management</span>
+            <span class="testimonial-company">Smartie Pants Inclusive Learning Center</span>
+          </div>
+        </div>
+        <!-- New Tede Projects Testimonial -->
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Excellent development execution. Our construction and renovations website is clean, modern, and loads instantly. WildCode delivered a solid platform that builds immediate trust with our commercial and residential clients."</p>
+          <div class="testimonial-meta">
+            <span class="testimonial-name">Operations Director</span>
+            <span class="testimonial-company">Tede Projects & Renovations</span>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"WildCode completely transformed our online presence. Our new site launched in under a week, and we immediately started receiving high-quality leads directly through our contact form. Professional, ultra-fast, and highly skilled."</p>
+          <div class="testimonial-meta">
+            <span class="testimonial-name">Marcus Evans</span>
+            <span class="testimonial-company">Director, TechFlow Engine</span>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"The mobile optimization is flawless. More than 80% of our customers browse on their phones, and WildCode built a platform that is extremely fast and converts clicks into sales effortlessly. Highly recommend their services."</p>
+          <div class="testimonial-meta">
+            <span class="testimonial-name">Sarah Jenkins</span>
+            <span class="testimonial-company">Founder, Glow Skin EC</span>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Incredible turnaround speed without compromising on design. They understood our brand vision instantly and developed a sharp, clean landing page that performs perfectly. Communication lines were direct and clear."</p>
+          <div class="testimonial-meta">
+            <span class="testimonial-name">David Khumalo</span>
+            <span class="testimonial-company">Operations Head, Fit Life Hub</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
       <h2>FREQUENTLY ASKED QUESTIONS</h2>
       <div class="faq-wrapper">
         <div class="faq-item">
           <button class="faq-trigger" onclick="toggleFaq(this)">
-            <span>What is the standard development turnaround timeline?</span>
+            <span>How long does it take to build a website?</span>
             <span class="faq-icon"></span>
           </button>
-          <div class="faq-content"><div class="faq-interior"><p class="faq-answer">Most digital real estate deployments are fully validated, compiled, and set live within a window of several business days.</p></div></div>
+          <div class="faq-content"><div class="faq-interior"><p class="faq-answer">Most websites are completed within 3–7 business days depending on project size and requirements.</p></div></div>
         </div>
         <div class="faq-item">
           <button class="faq-trigger" onclick="toggleFaq(this)">
-            <span>Are layouts fundamentally responsive for mobile devices?</span>
+            <span>Will my website work on mobile phones?</span>
             <span class="faq-icon"></span>
           </button>
-          <div class="faq-content"><div class="faq-interior"><p class="faq-answer">Absolutely. Every system goes through rigid verification to guarantee native multi-device performance.</p></div></div>
+          <div class="faq-content"><div class="faq-interior"><p class="faq-answer">Yes. Every website we build is optimized for phones, tablets, and desktop devices.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="toggleFaq(this)">
+            <span>Do I own the website after it is built?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-content"><div class="faq-interior"><p class="faq-answer">Yes, 100%. Once the project is completed and final payment is made, full ownership of the website code, assets, and content belongs entirely to you.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="toggleFaq(this)">
+            <span>Can I update the content myself later?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-content"><div class="faq-interior"><p class="faq-answer">Yes. We structure code cleanly so minor text and image updates are easy to make. We also provide maintenance options if you prefer us to handle updates for you.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="toggleFaq(this)">
+            <span>Are your websites optimized for Google (SEO)?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-content"><div class="faq-interior"><p class="faq-answer">Yes. All WildCode sites are built with SEO-ready structures, high-speed performance optimization, clean semantic HTML tag hierarchies, and metadata configured to help you rank on search engines.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="toggleFaq(this)">
+            <span>What do I need to get started?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-content"><div class="faq-interior"><p class="faq-answer">To begin execution, we require your business logo, text content/descriptions of your services, and any specific images you want featured. If you do not have images, we can source high-quality professional placeholders.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="toggleFaq(this)">
+            <span>Is website hosting and domain registration included?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-content"><div class="faq-interior"><p class="faq-answer">We will set up and deploy your live site securely. We will assist you in connecting your personal custom domain and choosing an affordable hosting architecture that suits your exact business traffic needs.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="toggleFaq(this)">
+            <span>What payment methods do you accept?</span>
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-content"><div class="faq-interior"><p class="faq-answer">We accept secure Electronic Funds Transfers (EFT) and direct bank deposits. Project milestones typically operate on a structured deposit system prior to code initialization.</p></div></div>
         </div>
       </div>
     </div>
 
     <div class="section-card" style="border-color: rgba(0, 255, 204, 0.4); background: rgba(0, 85, 255, 0.02);">
-      <h2>INITIATE SYSTEM DEPLOYMENT</h2>
-      <p>Partner with <b>WildCode</b> to establish a dominant online presence.</p>
+      <h2>Start Your Project</h2>
+      <p>Ready to build your online presence? Let's create a website that helps your business grow.</p>
       
       <div class="cta-wrapper">
         <button id="formToggleBtn" onclick="toggleProjectForm()">START YOUR PROJECT</button>
@@ -621,16 +806,16 @@
           <input type="hidden" name="access_key" value="51ade758-8182-4474-a2c8-84bd1fb60c0b">
           <input type="hidden" name="subject" value="New Elite Project Submission - WildCode">
           
-          <label for="userName">Operator Identification / Name</label>
+          <label for="userName">Full Name</label>
           <input type="text" id="userName" name="name" placeholder="Your Name" required>
           
-          <label for="userEmail">Communications Routing / Email Address</label>
+          <label for="userEmail">Email Address</label>
           <input type="email" id="userEmail" name="email" placeholder="Your Email Address" required>
           
-          <label for="userMessage">Project Operational Parameters</label>
+          <label for="userMessage">Tell Us About Your Project</label>
           <textarea id="userMessage" name="message" rows="5" placeholder="Detail your project goals..." required></textarea>
           
-          <button type="submit">Transmit Blueprint Data</button>
+          <button type="submit">Submit Project Request</button>
         </form>
       </div>
 
@@ -684,16 +869,9 @@
         let height = canvas.height = window.innerHeight;
         const columns = Math.floor(width / 24);
         const yPositions = Array(columns).fill(0);
-        
-        let lastTime = 0;
-        const fpsInterval = 40;
 
-        function matrixRain(timestamp) {
-          requestAnimationFrame(matrixRain);
-          if (timestamp - lastTime < fpsInterval) return;
-          lastTime = timestamp;
-
-          ctx.fillStyle = 'rgba(3, 7, 18, 0.08)';
+        function matrixRain() {
+          ctx.fillStyle = 'rgba(3, 7, 18, 0.035)';
           ctx.fillRect(0, 0, width, height);
           ctx.fillStyle = '#00ffcc';
           ctx.font = '15px monospace';
@@ -704,12 +882,13 @@
             const y = yPositions[i];
             ctx.fillText(text, x, y);
 
-            if (y > height && Math.random() > 0.98) {
+            if (y > height && Math.random() > 0.975) {
               yPositions[i] = 0;
             } else {
-              yPositions[i] += 12;
+              yPositions[i] += 4;
             }
           }
+          requestAnimationFrame(matrixRain);
         }
         requestAnimationFrame(matrixRain);
 
