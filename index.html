@@ -43,8 +43,8 @@
         background-color: var(--bg-dark);
         color: var(--text-main);
         font-family: var(--font-sans);
-        line-height: 1.7;
-        padding: 40px 20px 140px 20px;
+        line-height: 1.75;
+        padding: 20px 12px 140px 12px;
         max-width: 1100px;
         margin: 0 auto;
         overflow-x: hidden;
@@ -52,32 +52,33 @@
       }
 
       #matrixCanvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: -1;
-        opacity: 0.35;
-        pointer-events: none;
-        content-visibility: auto;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: -1 !important;
+        opacity: 0.35 !important;
+        pointer-events: none !important;
+        display: block !important;
       }
 
       .hero-section {
-        margin: 0 auto 60px auto;
-        padding: 0 20px;
+        margin: 0 auto 40px auto;
+        padding: 0 10px;
         position: relative;
         z-index: 1;
+        text-align: center;
       }
 
       .shifting-hero-text {
-        text-align: center;
-        font-size: 3rem;
+        font-size: clamp(2rem, 6vw, 3.5rem);
         margin-bottom: 15px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         font-family: var(--font-display);
         animation: colorShift 6s ease-in-out infinite alternate;
+        line-height: 1.2;
       }
 
       @keyframes colorShift {
@@ -91,28 +92,83 @@
         }
       }
 
+      .hero-cta-box {
+        margin: 30px auto 25px auto;
+        display: inline-block;
+        width: 100%;
+        max-width: 380px;
+      }
+
+      .hero-wa-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        font-family: var(--font-display);
+        background: #1ea94b;
+        color: #ffffff;
+        font-weight: 700;
+        text-decoration: none;
+        padding: 18px 32px;
+        font-size: clamp(1.1rem, 3vw, 1.25rem);
+        border-radius: 50px;
+        letter-spacing: 1px;
+        box-shadow: 0 10px 30px rgba(30, 169, 75, 0.35);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .hero-wa-btn:active {
+        transform: scale(0.98);
+      }
+
+      .hero-wa-btn svg {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+      }
+
+      .hero-trust-badges {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 24px;
+        margin-top: 25px;
+        padding: 10px;
+      }
+
+      .trust-badge-item {
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .trust-badge-item span {
+        color: #ffffff;
+        text-shadow: 0 0 10px var(--accent-glow);
+      }
+
       .section-card {
         background: var(--card-bg);
         border: 1px solid rgba(0, 85, 255, 0.15);
         border-radius: 24px;
-        padding: 40px;
-        margin-bottom: 45px;
+        padding: clamp(22px, 4.5vw, 40px);
+        margin-bottom: 35px;
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
         position: relative;
         z-index: 2;
       }
 
-      .section-card:hover {
-        border-color: rgba(0, 255, 204, 0.3);
-        box-shadow: 0 25px 50px rgba(0, 255, 204, 0.05);
-      }
-
       .logo-container {
         text-align: center;
-        margin: 40px 0 30px 0;
+        margin: 20px 0 25px 0;
         display: flex;
         justify-content: center;
         position: relative;
@@ -126,11 +182,6 @@
         border-radius: 14px;
         mix-blend-mode: screen;
         filter: contrast(1.25) brightness(1.1) drop-shadow(0 0 25px rgba(0, 85, 255, 0.25));
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-
-      .logo-container:hover img {
-        transform: scale(1.02);
       }
 
       h1 {
@@ -141,11 +192,11 @@
       h2 {
         font-family: var(--font-display);
         color: var(--accent);
-        font-size: 1.6rem;
+        font-size: clamp(1.4rem, 4vw, 1.8rem);
         font-weight: 700;
         letter-spacing: 1px;
         text-transform: uppercase;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         padding-bottom: 15px;
         display: flex;
@@ -162,8 +213,8 @@
       h3 { 
         font-family: var(--font-display);
         color: #ffffff;
-        font-size: 1.25rem; 
-        margin-top: 40px;
+        font-size: clamp(1.25rem, 3.5vw, 1.45rem); 
+        margin-top: 30px;
         margin-bottom: 15px;
         display: flex;
         align-items: center;
@@ -173,7 +224,7 @@
         content: '';
         display: inline-block;
         width: 5px;
-        height: 16px;
+        height: 18px;
         background: var(--primary);
         margin-right: 12px;
         border-radius: 4px;
@@ -184,14 +235,14 @@
         font-family: var(--font-display);
         color: var(--accent);
         font-size: 1.4rem; 
-        margin-top: 35px;
+        margin-top: 30px;
         margin-bottom: 20px;
       }
 
       p {
         margin-bottom: 20px;
         color: var(--text-muted);
-        font-size: 1.05rem;
+        font-size: clamp(1.05rem, 2.8vw, 1.15rem);
       }
       
       b, strong {
@@ -202,7 +253,7 @@
         border: 0;
         height: 1px;
         background: linear-gradient(to right, transparent, var(--primary), var(--accent), var(--primary), transparent);
-        margin: 50px 0;
+        margin: 40px 0;
       }
 
       .img-wrapper {
@@ -213,6 +264,7 @@
         margin: 20px 0;
         background: #060b19;
         aspect-ratio: 16 / 9;
+        width: 100%;
       }
 
       img {
@@ -220,75 +272,57 @@
         height: 100%;
         object-fit: cover;
         display: block;
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      
-      .img-wrapper:hover img {
-        transform: scale(1.02);
       }
 
       .services-group .service-block {
         background: rgba(255, 255, 255, 0.01);
-        padding: 25px;
+        padding: clamp(18px, 3.5vw, 25px);
         border-radius: 14px;
         border: 1px solid rgba(255, 255, 255, 0.03);
-        margin-bottom: 30px;
+        margin-bottom: 25px;
       }
 
       .feature-list {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
-        margin: 35px 0;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        gap: 16px;
+        margin: 25px 0;
       }
 
       .feature-item {
         background: linear-gradient(135deg, rgba(6, 11, 25, 0.8), rgba(10, 20, 45, 0.9));
         border: 1px solid rgba(0, 255, 204, 0.12);
-        padding: 24px;
+        padding: 20px;
         border-radius: 16px;
         display: flex;
         align-items: center;
         color: #e2f0ff;
         font-weight: 600;
-        font-size: 1.05rem;
+        font-size: clamp(1.05rem, 2.5vw, 1.15rem);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        will-change: transform;
-      }
-
-      .feature-item:hover {
-        border-color: var(--accent);
-        transform: translateY(-5px);
-        box-shadow: 0 20px 35px rgba(0, 255, 204, 0.15);
       }
 
       .feature-item span {
         color: var(--accent);
-        margin-right: 16px;
-        font-size: 1.5rem;
+        margin-right: 14px;
+        font-size: 1.4rem;
         text-shadow: 0 0 12px var(--accent-glow);
       }
 
       .project-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+        gap: 25px;
         list-style: none;
       }
       
       .project-card {
         background: rgba(255, 255, 255, 0.01);
         border: 1px solid rgba(255, 255, 255, 0.04);
-        padding: 24px;
+        padding: 20px;
         border-radius: 18px;
-        transition: transform 0.3s ease, border-color 0.3s ease;
-      }
-
-      .project-card:hover {
-        background: rgba(6, 11, 25, 0.8);
-        border-color: rgba(0, 85, 255, 0.4);
-        transform: translateY(-4px);
+        display: flex;
+        flex-direction: column;
       }
 
       .project-card b {
@@ -300,58 +334,105 @@
         letter-spacing: 0.5px;
       }
 
-      .testimonials-grid {
+      .profile-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 25px;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+        gap: 24px;
       }
 
-      .testimonial-card {
-        background: rgba(255, 255, 255, 0.01);
-        border: 1px solid rgba(255, 255, 255, 0.04);
-        border-left: 3px solid var(--accent);
-        padding: 28px;
+      .profile-card {
+        background: rgba(6, 11, 25, 0.8);
+        border: 1px solid rgba(0, 85, 255, 0.15);
+        border-left: 4px solid var(--accent);
+        padding: 24px;
         border-radius: 16px;
-        transition: transform 0.3s ease, border-color 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
 
-      .testimonial-card:hover {
-        transform: translateY(-3px);
-        border-color: rgba(0, 85, 255, 0.3);
+      .profile-card h3 {
+        margin-top: 0;
+        color: var(--accent);
+        font-size: 1.2rem;
+        letter-spacing: 0.5px;
+        margin-bottom: 15px;
       }
 
-      .testimonial-quote {
+      .profile-card h3::before {
+        display: none;
+      }
+
+      .profile-metric-list {
+        list-style: none;
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+
+      .profile-metric-list li {
+        margin-bottom: 8px;
         color: var(--text-main);
         font-size: 1.05rem;
-        font-style: italic;
-        margin-bottom: 20px;
-        line-height: 1.6;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .profile-metric-list li span {
+        color: var(--accent);
+        font-weight: bold;
+      }
+
+      .project-link-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 85, 255, 0.15);
+        border: 1px solid var(--primary);
+        color: #ffffff;
+        text-decoration: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+        margin-top: auto;
+        text-transform: uppercase;
+      }
+
+      .testimonial-box {
+        background: rgba(0, 255, 204, 0.03);
+        border: 1px dashed rgba(0, 255, 204, 0.2);
+        padding: 16px;
+        border-radius: 12px;
+        margin-top: 20px;
         position: relative;
       }
 
-      .testimonial-meta {
-        display: flex;
-        flex-direction: column;
+      .testimonial-text {
+        font-style: italic;
+        color: var(--text-main);
+        font-size: 1rem;
+        margin-bottom: 8px;
+        line-height: 1.6;
       }
 
-      .testimonial-name {
+      .testimonial-author {
         font-family: var(--font-display);
-        font-weight: 700;
-        color: #ffffff;
-        font-size: 1.1rem;
-      }
-
-      .testimonial-company {
+        font-size: 0.85rem;
         color: var(--accent);
-        font-size: 0.9rem;
-        font-weight: 600;
-        margin-top: 2px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: block;
+        text-align: right;
+        font-weight: 700;
       }
 
       .faq-wrapper {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
       }
 
       .faq-item {
@@ -365,22 +446,23 @@
         width: 100%;
         background: none;
         border: none;
-        padding: 22px 25px;
+        padding: 20px;
         text-align: left;
         color: #ffffff;
         font-family: var(--font-sans);
-        font-size: 1.1rem;
+        font-size: clamp(1.05rem, 2.8vw, 1.15rem);
         font-weight: 600;
         cursor: pointer;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 15px;
       }
 
       .faq-icon {
         display: inline-block;
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
         border-right: 2px solid var(--accent);
         border-bottom: 2px solid var(--accent);
         transform: rotate(45deg);
@@ -408,15 +490,17 @@
       }
 
       .faq-answer {
-        padding: 0 25px 22px 25px;
+        padding: 0 20px 20px 20px;
         color: var(--text-muted);
         margin: 0;
-        font-size: 1rem;
+        font-size: clamp(1rem, 2.5vw, 1.1rem);
       }
 
       .cta-wrapper {
         text-align: center;
-        padding: 25px 0;
+        padding: 20px 0;
+        position: relative;
+        z-index: 20;
       }
 
       #formToggleBtn {
@@ -425,29 +509,36 @@
         color: var(--bg-dark);
         font-weight: 700;
         border: none;
-        padding: 16px 40px;
-        font-size: 1.1rem;
+        padding: 22px 45px;
+        font-size: clamp(1.2rem, 3.5vw, 1.35rem);
         border-radius: 50px;
         cursor: pointer;
-        box-shadow: 0 10px 30px rgba(0, 255, 204, 0.25);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        letter-spacing: 0.5px;
+        box-shadow: 0 12px 35px rgba(0, 255, 204, 0.35);
+        width: 100%;
+        max-width: 420px;
+        letter-spacing: 1px;
         position: relative;
-        z-index: 10;
-      }
-
-      #formToggleBtn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 15px 40px rgba(0, 255, 204, 0.35);
+        z-index: 30;
+        pointer-events: auto;
+        display: inline-block;
+        text-transform: uppercase;
       }
 
       #projectFormContainer {
         display: none;
         background: #050b18;
         border: 1px solid var(--accent);
-        padding: 40px;
+        padding: clamp(22px, 4.5vw, 40px);
         border-radius: 20px;
-        margin: 35px 0;
+        margin: 25px 0;
+        position: relative;
+        z-index: 25;
+      }
+
+      .form-grid-layout {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+        gap: 0 20px;
       }
 
       #projectFormContainer label {
@@ -455,10 +546,11 @@
         margin-bottom: 10px;
         color: #ffffff;
         font-weight: 600;
-        font-size: 0.95rem;
+        font-size: 1.05rem;
       }
 
       #projectFormContainer input, 
+      #projectFormContainer select,
       #projectFormContainer textarea {
         width: 100%;
         padding: 16px;
@@ -466,16 +558,24 @@
         border: 1px solid rgba(0, 85, 255, 0.25);
         border-radius: 10px;
         color: #fff;
-        margin-bottom: 25px;
-        font-size: 1rem;
+        margin-bottom: 20px;
+        font-size: 1.05rem;
         font-family: var(--font-sans);
+        appearance: none;
+        -webkit-appearance: none;
       }
 
-      #projectFormContainer input:focus, 
-      #projectFormContainer textarea:focus {
-        border-color: var(--accent);
-        outline: none;
-        background: rgba(255, 255, 255, 0.05);
+      #projectFormContainer select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300ffcc'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 16px center;
+        background-size: 24px;
+        padding-right: 45px;
+      }
+
+      #projectFormContainer select option {
+        background: #050b18;
+        color: #fff;
       }
 
       #projectFormContainer button[type="submit"] {
@@ -490,29 +590,41 @@
         cursor: pointer;
         width: 100%;
         letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      /* Active Interactive Link Wrapping for direct Actions */
+      .direct-contact-action-link {
+        color: var(--accent) !important;
+        text-decoration: underline !important;
+        font-weight: bold !important;
+        display: inline-block;
       }
 
       .comm-dock {
-        position: fixed;
-        bottom: 24px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(6, 11, 25, 0.85);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 10px 24px;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        z-index: 999;
-        border-radius: 100px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+        position: fixed !important;
+        bottom: 24px !important;
+        left: 50% !important;
+        transform: translate(-50%, 0) !important;
+        background: rgba(6, 11, 25, 0.95) !important;
+        backdrop-filter: blur(24px) !important;
+        -webkit-backdrop-filter: blur(24px) !important;
+        border: 1px solid rgba(0, 255, 204, 0.3) !important;
+        padding: 14px 28px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 20px !important;
+        z-index: 2147483647 !important;
+        border-radius: 100px !important;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95) !important;
+        width: calc(100% - 24px) !important;
+        max-width: 400px !important;
+        justify-content: space-between !important;
       }
 
       .comm-dock-label {
         font-family: var(--font-display);
-        font-size: 0.9rem;
+        font-size: 1rem;
         font-weight: 700;
         color: var(--accent);
         letter-spacing: 1px;
@@ -521,51 +633,47 @@
 
       .comm-icons-group {
         display: flex;
-        gap: 12px;
+        gap: 14px;
       }
 
       .comm-btn-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        color: #fff;
-        text-decoration: none;
-        transition: transform 0.2s ease;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 46px !important;
+        height: 46px !important;
+        border-radius: 50% !important;
+        color: #fff !important;
+        text-decoration: none !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       }
 
       .comm-btn-icon svg {
-        width: 20px;
-        height: 20px;
-        fill: currentColor;
+        width: 24px !important;
+        height: 24px !important;
+        fill: currentColor !important;
       }
 
-      .comm-btn-icon:hover {
-        transform: translateY(-2px);
-      }
+      .icon-whatsapp { background-color: #1ea94b !important; }
+      .icon-call { background-color: #004fe5 !important; }
 
-      .icon-whatsapp { background-color: #1ea94b; }
-      .icon-call { background-color: #004fe5; }
-      .icon-mail { background-color: #ce2c3c; }
-
-      @media (max-width: 600px) {
-        h2 { font-size: 1.3rem; gap: 8px; }
-        body { padding-bottom: 140px; }
-        .comm-dock { width: calc(100% - 40px); justify-content: space-between; padding: 10px 20px; }
-      }
-
-      @media (max-width: 480px) {
-        .project-grid { grid-template-columns: 1fr; }
-        .testimonials-grid { grid-template-columns: 1fr; }
-        .shifting-hero-text { font-size: 2.2rem !important; }
+      @media (min-width: 600px) {
+        body { padding: 40px 20px 140px 20px; }
+        .comm-dock { width: auto !important; max-width: none !important; justify-content: center !important; gap: 24px !important; padding: 14px 32px !important; }
+        .comm-btn-icon { width: 48px !important; height: 48px !important; }
+        .project-card:hover { background: rgba(6, 11, 25, 0.8); border-color: rgba(0, 85, 255, 0.4); transform: translateY(-4px); transition: transform 0.3s ease, border-color 0.3s ease; }
+        .profile-card:hover { border-color: var(--accent); transform: translateY(-3px); transition: transform 0.3s ease, border-color 0.3s ease; }
+        .project-link-btn:hover { background: var(--primary); border-color: #ffffff; }
+        .feature-item:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 20px 35px rgba(0, 255, 204, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+        .img-wrapper:hover img { transform: scale(1.02); }
+        #formToggleBtn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 255, 204, 0.45); }
+        .hero-wa-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(30, 169, 75, 0.5); }
       }
 
       footer {
         text-align: center;
-        padding: 60px 0;
-        margin-top: 60px;
+        padding: 40px 0;
+        margin-top: 40px;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
       }
       
@@ -577,7 +685,7 @@
       footer .brand-signature {
         font-family: var(--font-display);
         color: #ffffff;
-        font-size: 1.15rem;
+        font-size: 1.2rem;
         letter-spacing: 0.5px;
       }
     </style>
@@ -594,15 +702,29 @@
       <h1 class="shifting-hero-text">
         Websites That Grow Businesses
       </h1>
-      <p style="text-align:center;max-width:700px;margin:auto;color:#94a3b8;font-size:1.15rem;">
+      <p style="text-align:center;max-width:700px;margin:auto;color:#94a3b8;font-size:clamp(1.1rem, 3vw, 1.25rem);">
         Professional websites designed to attract customers, build credibility, and help your business grow online.
       </p>
+
+      <div class="hero-cta-box">
+        <a href="https://wa.me/27612832392" class="hero-wa-btn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12.004 2c-5.51 0-9.99 4.49-9.99 10 0 1.77.46 3.49 1.34 5.02L2 22l5.14-1.35c1.48.81 3.14 1.24 4.86 1.24 5.51 0 9.99-4.49 9.99-10S17.52 2 12.004 2zm3.86 14.22c-.21.58-1.21 1.13-1.67 1.19-.46.06-.9.1-3.04-.74-2.58-1.01-4.21-3.63-4.34-3.8-.13-.18-1.04-1.38-1.04-2.63 0-1.25.65-1.87.88-2.13.23-.26.5-.32.67-.32.17 0 .34.01.49.02.16.01.37-.06.58.45.22.54.75 1.83.82 1.96.07.13.11.29.02.48-.09.18-.14.3-.28.46-.14.16-.3.36-.43.49-.15.15-.31.31-.13.62.18.3.81 1.33 1.74 2.16.15.13.88.77 1.63.85.25.02.48-.02.66-.21.19-.2.82-.95 1.04-1.28.22-.33.44-.28.74-.17.3.11 1.91.9 2.24 1.06.33.16.55.24.63.38.08.14.08.8-.13 1.38z"/></svg>
+          GET A FREE QUOTE
+        </a>
+      </div>
+
+      <div class="hero-trust-badges">
+        <div class="trust-badge-item"><span>✓</span> Mobile Optimized</div>
+        <div class="trust-badge-item"><span>✓</span> Fast Loading</div>
+        <div class="trust-badge-item"><span>✓</span> SEO Ready</div>
+        <div class="trust-badge-item"><span>✓</span> Built For Businesses</div>
+      </div>
     </div>
     
     <div class="section-card">
       <h2>ABOUT WILDCODE</h2>
       <div class="img-wrapper">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/hRTKv85G/istockphoto-1435220822-612x612.jpg" alt="Production Lab" class="lazy-load">
+        <img src="https://i.ibb.co/hRTKv85G/istockphoto-1435220822-612x612.jpg" alt="Production Lab">
       </div>
       <p><b>WildCode</b> builds modern, high-performance websites for businesses, entrepreneurs, and creators. We combine clean design, fast performance, and mobile-friendly development to help brands build trust, attract customers, and grow online. Whether you need a business website, landing page, portfolio, or online store, we create digital experiences that look professional and deliver results.</p>
     </div>
@@ -613,7 +735,7 @@
       <div class="service-block">
         <h3>Modern Website Design</h3>
         <div class="img-wrapper">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/SXsZ7yBy/web-designing-1024x683.jpg" alt="UI Design" class="lazy-load">
+          <img src="https://i.ibb.co/SXsZ7yBy/web-designing-1024x683.jpg" alt="UI Design">
         </div>
         <p>We create beautiful, user-friendly websites that reflect your brand and provide a smooth experience for your visitors.</p>
       </div>
@@ -621,7 +743,7 @@
       <div class="service-block">
         <h3>Mobile-Friendly Development</h3>
         <div class="img-wrapper">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/FL65PcWs/A-Complete-Guide-to-Responsive-Web-Development-in-2023-2.jpg" alt="Responsive Build" class="lazy-load">
+          <img src="https://i.ibb.co/FL65PcWs/A-Complete-Guide-to-Responsive-Web-Development-in-2023-2.jpg" alt="Responsive Build">
         </div>
         <p>Every website is fully responsive and works perfectly on phones, tablets, laptops, and desktop computers.</p>
       </div>
@@ -629,15 +751,15 @@
       <div class="service-block">
         <h3>Landing Pages That Convert</h3>
         <div class="img-wrapper">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/S1Jkqrx/Landing-Page-Examples.png" alt="Landing Matrices" class="lazy-load">
+          <img src="https://i.ibb.co/S1Jkqrx/Landing-Page-Examples.png" alt="Landing Matrices">
         </div>
-        <p>We build focused landing pages designed to turn visitors into customers, helping you generate more leads and sales.</p>
+        <p>We build landing pages that help businesses generate more leads, enquiries, and sales.</p>
       </div>
 
       <div class="service-block">
         <h3>Business Websites</h3>
         <div class="img-wrapper">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/Kp1tWSym/Creating-Visually-Stunning-and-Functional-Business-Websites.jpg" alt="Business Portals" class="lazy-load">
+          <img src="https://i.ibb.co/Kp1tWSym/Creating-Visually-Stunning-and-Functional-Business-Websites.jpg" alt="Business Portals">
         </div>
         <p>Professional websites that help businesses build credibility, showcase services, and attract new customers.</p>
       </div>
@@ -663,72 +785,92 @@
         <li class="project-card">
           <b>TECHFLOW ENGINE</b>
           <div class="img-wrapper">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/YFBpkY0S/1779317648987.png" alt="TechFlow Build" class="lazy-load">
+            <img src="https://i.ibb.co/YFBpkY0S/1779317648987.png" alt="TechFlow Build">
           </div>
         </li>
         <li class="project-card">
           <b>GLOW SKIN EC</b>
           <div class="img-wrapper">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/wrP9G81s/1779317658279.png" alt="Glow Skin Ecom" class="lazy-load">
+            <img src="https://i.ibb.co/wrP9G81s/1779317658279.png" alt="Glow Skin Ecom">
           </div>
         </li>
         <li class="project-card">
           <b>FIT LIFE HUB</b>
           <div class="img-wrapper">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/hxLDNPVG/1779317666084.png" alt="Fit Life Hub" class="lazy-load">
+            <img src="https://i.ibb.co/hxLDNPVG/1779317666084.png" alt="Fit Life Hub">
           </div>
         </li>
         <li class="project-card">
           <b>CREATIVO MEDIA</b>
           <div class="img-wrapper">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='100%25' height='100%25' fill='%23060b19'/%3E%3C/svg%3E" data-src="https://i.ibb.co/YBkLWfSH/1779317672845.png" alt="Creativo Media" class="lazy-load">
+            <img src="https://i.ibb.co/YBkLWfSH/1779317672845.png" alt="Creativo Media">
           </div>
         </li>
       </ul>
     </div>
 
     <div class="section-card">
-      <h2>CLIENT TESTIMONIALS</h2>
-      <p>What business owners say about partnering with WildCode.</p>
-      <div class="testimonials-grid">
-        <!-- New Smartie Pants Testimonial -->
-        <div class="testimonial-card">
-          <p class="testimonial-quote">"WildCode built an incredible custom platform for our learning center. The site structure, navigation, and specific brand colors look highly professional and match our vision perfectly. Our parents love the new interface."</p>
-          <div class="testimonial-meta">
-            <span class="testimonial-name">Management</span>
-            <span class="testimonial-company">Smartie Pants Inclusive Learning Center</span>
+      <h2>PROJECT PROFILES</h2>
+      <p style="margin-bottom: 25px;">A closer look at our dedicated operational deployments, live architectures, and client reviews.</p>
+      <div class="profile-grid">
+        
+        <div class="profile-card">
+          <div>
+            <h3>PROJECT: SMARTIE PANTS INCLUSIVE LEARNING CENTER</h3>
+            <ul class="profile-metric-list">
+              <li><span>✓</span> Responsive Design</li>
+              <li><span>✓</span> Mobile Friendly</li>
+              <li><span>✓</span> Custom Branding</li>
+              <li><span>✓</span> Contact Form Integration</li>
+              <li><span>✓</span> Fast Loading Performance</li>
+            </ul>
+            <div class="testimonial-box">
+              <p class="testimonial-text">"WildCode delivered exactly what we needed. Our new website is clean, easy to navigate, and parents love the mobile interface!"</p>
+              <span class="testimonial-author">— JESSICA, Smartie Pants</span>
+            </div>
           </div>
+          <a href="https://wildcoderoboticspng.github.io/smartiepants.com/" class="project-link-btn" target="_blank" rel="noopener" style="margin-top: 20px;">View Live Project</a>
         </div>
-        <!-- New Tede Projects Testimonial -->
-        <div class="testimonial-card">
-          <p class="testimonial-quote">"Excellent development execution. Our construction and renovations website is clean, modern, and loads instantly. WildCode delivered a solid platform that builds immediate trust with our commercial and residential clients."</p>
-          <div class="testimonial-meta">
-            <span class="testimonial-name">Operations Director</span>
-            <span class="testimonial-company">Tede Projects & Renovations</span>
+        
+        <div class="profile-card">
+          <div>
+            <h3>PROJECT: TEDE PROJECTS & RENOVATIONS</h3>
+            <ul class="profile-metric-list">
+              <li><span>✓</span> Professional Business Website</li>
+              <li><span>✓</span> Service Showcase</li>
+              <li><span>✓</span> Mobile Optimization</li>
+              <li><span>✓</span> Lead Generation Contact Form</li>
+              <li><span>✓</span> Modern User Interface</li>
+            </ul>
+            <div class="testimonial-box">
+              <p class="testimonial-text">"Outstanding service and clean development. The project layout makes it seamless for potential clients to view our construction portfolio."</p>
+              <span class="testimonial-author">— COLLEN, Tede Projects</span>
+            </div>
           </div>
+          <a href="https://wildcoderoboticspng.github.io/TEDE-PROJECTS-AND-RENOVATIONS-./" class="project-link-btn" target="_blank" rel="noopener" style="margin-top: 20px;">View Live Project</a>
         </div>
-        <div class="testimonial-card">
-          <p class="testimonial-quote">"WildCode completely transformed our online presence. Our new site launched in under a week, and we immediately started receiving high-quality leads directly through our contact form. Professional, ultra-fast, and highly skilled."</p>
-          <div class="testimonial-meta">
-            <span class="testimonial-name">Marcus Evans</span>
-            <span class="testimonial-company">Director, TechFlow Engine</span>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-quote">"The mobile optimization is flawless. More than 80% of our customers browse on their phones, and WildCode built a platform that is extremely fast and converts clicks into sales effortlessly. Highly recommend their services."</p>
-          <div class="testimonial-meta">
-            <span class="testimonial-name">Sarah Jenkins</span>
-            <span class="testimonial-company">Founder, Glow Skin EC</span>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-quote">"Incredible turnaround speed without compromising on design. They understood our brand vision instantly and developed a sharp, clean landing page that performs perfectly. Communication lines were direct and clear."</p>
-          <div class="testimonial-meta">
-            <span class="testimonial-name">David Khumalo</span>
-            <span class="testimonial-company">Operations Head, Fit Life Hub</span>
-          </div>
-        </div>
+
       </div>
+    </div>
+
+    <div class="section-card">
+      <h2>WHY CLIENTS CHOOSE WILDCODE</h2>
+      <div class="feature-list">
+        <div class="feature-item"><span>✓</span> Fast Turnaround</div>
+        <div class="feature-item"><span>✓</span> Mobile Friendly Websites</div>
+        <div class="feature-item"><span>✓</span> SEO Ready Structure</div>
+        <div class="feature-item"><span>✓</span> Direct Communication</div>
+        <div class="feature-item"><span>✓</span> Modern Professional Design</div>
+        <div class="feature-item"><span>✓</span> Worldwide Client Support</div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>CUSTOM PRICING</h2>
+      <p>Every project is unique.</p>
+      <p>We provide tailored quotes based on your requirements, project complexity, timeline, and business goals.</p>
+      <p>WildCode serves clients worldwide and pricing is customized according to project scope.</p>
+      <p><b>Contact us for a free consultation and project estimate.</b></p>
     </div>
 
     <div class="section-card">
@@ -806,95 +948,134 @@
           <input type="hidden" name="access_key" value="51ade758-8182-4474-a2c8-84bd1fb60c0b">
           <input type="hidden" name="subject" value="New Elite Project Submission - WildCode">
           
-          <label for="userName">Full Name</label>
-          <input type="text" id="userName" name="name" placeholder="Your Name" required>
-          
-          <label for="userEmail">Email Address</label>
-          <input type="email" id="userEmail" name="email" placeholder="Your Email Address" required>
+          <div class="form-grid-layout">
+            <div>
+              <label for="userName">Full Name</label>
+              <input type="text" id="userName" name="name" placeholder="Your Name" required>
+            </div>
+            <div>
+              <label for="userBusiness">Business Name</label>
+              <input type="text" id="userBusiness" name="business_name" placeholder="Your Company Name" required>
+            </div>
+          </div>
+
+          <div class="form-grid-layout">
+            <div>
+              <label for="userEmail">Email Address</label>
+              <input type="email" id="userEmail" name="email" placeholder="Your Email Address" required>
+            </div>
+            <div>
+              <label for="userCountry">Country</label>
+              <input type="text" id="userCountry" name="country" placeholder="e.g. South Africa, USA" required>
+            </div>
+          </div>
+
+          <div class="form-grid-layout">
+            <div>
+              <label for="websiteType">Website Type</label>
+              <select id="websiteType" name="website_type" required>
+                <option value="" disabled selected>Select Website Type</option>
+                <option value="Business Website">Business Website</option>
+                <option value="Landing Page">Landing Page</option>
+                <option value="E-commerce Store">E-commerce Store</option>
+                <option value="Portfolio / Personal">Portfolio / Personal</option>
+                <option value="Custom Development">Custom Development</option>
+              </select>
+            </div>
+            <div>
+              <label for="budgetRange">Budget Range</label>
+              <select id="budgetRange" name="budget_range" required>
+                <option value="" disabled selected>Select Budget Range</option>
+                <option value="Under $300">Under $300</option>
+                <option value="$300 - $1000">$300 - $1000</option>
+                <option value="$1000 - $3000">$1000 - $3000</option>
+                <option value="$3000+">$3000+</option>
+              </select>
+            </div>
+          </div>
           
           <label for="userMessage">Tell Us About Your Project</label>
-          <textarea id="userMessage" name="message" rows="5" placeholder="Detail your project goals..." required></textarea>
+          <textarea id="userMessage" name="message" rows="5" placeholder="Detail your project goals, timelines, or requirements..." required></textarea>
           
           <button type="submit">Submit Project Request</button>
         </form>
       </div>
 
       <h4 style="color:#ffffff; margin-top:40px;">Direct Communication Lines</h4>
-      <p style="margin-bottom:0; font-family: var(--font-display); font-size: 1.1rem; line-height: 1.9;">
-        📞 Phone: <span style="color:#fff;">+27 612832392</span><br>
-        ✉ Email: <span style="color:var(--accent);">wildcoderobotics@gmail.com</span><br>
-        💬 WhatsApp: <span style="color:#fff;">+27 612832392</span>
+      <p style="margin-bottom:0; font-family: var(--font-display); font-size: 1.15rem; line-height: 1.9;">
+        📞 Phone: <a href="tel:+27612832392" class="direct-contact-action-link">+27 612832392</a><br>
+        ✉ Email: <a href="mailto:wildcoderobotics@gmail.com" class="direct-contact-action-link">wildcoderobotics@gmail.com</a><br>
+        💬 WhatsApp: <a href="https://wa.me/27612832392" target="_blank" rel="noopener" class="direct-contact-action-link">+27 612832392</a>
       </p>
     </div>
 
     <div class="comm-dock">
       <span class="comm-dock-label">Contact Now</span>
       <div class="comm-icons-group">
-        <a href="https://wa.me/27612832392" class="comm-btn-icon icon-whatsapp" target="_blank" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.966C16.273 1.975 13.802 1.95 11.2 1.95c-5.438 0-9.863 4.374-9.867 9.804-.002 1.73.475 3.42 1.378 4.92l-.994 3.629 3.73-.951zM17.16 14.89c-.3-.15-1.777-.878-2.037-.973-.26-.095-.45-.14-.64.15-.19.29-.74.973-.91 1.162-.17.19-.34.21-.64.06-.3-.15-1.27-.47-2.42-1.493-.89-.8-1.5-1.78-1.67-2.08-.18-.3-.02-.46.13-.61.14-.13.3-.35.45-.53.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.07-.15-.64-1.54-.88-2.114-.23-.56-.47-.484-.64-.492-.17-.008-.36-.01-.55-.01-.2 0-.52.07-.79.37-.27.3-1.03 1.01-1.03 2.47 0 1.46 1.06 2.87 1.21 3.07.15.2 2.09 3.2 5.07 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.11.57-.08 1.77-.73 2.02-1.43.25-.7.25-1.29.18-1.42-.07-.13-.26-.21-.56-.36z"/></svg>
+        <a href="https://wa.me/27612832392" class="comm-btn-icon icon-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12.004 2c-5.51 0-9.99 4.49-9.99 10 0 1.77.46 3.49 1.34 5.02L2 22l5.14-1.35c1.48.81 3.14 1.24 4.86 1.24 5.51 0 9.99-4.49 9.99-10S17.52 2 12.004 2zm3.86 14.22c-.21.58-1.21 1.13-1.67 1.19-.46.06-.9.1-3.04-.74-2.58-1.01-4.21-3.63-4.34-3.8-.13-.18-1.04-1.38-1.04-2.63 0-1.25.65-1.87.88-2.13.23-.26.5-.32.67-.32.17 0 .34.01.49.02.16.01.37-.06.58.45.22.54.75 1.83.82 1.96.07.13.11.29.02.48-.09.18-.14.3-.28.46-.14.16-.3.36-.43.49-.15.15-.31.31-.13.62.18.3.81 1.33 1.74 2.16.15.13.88.77 1.63.85.25.02.48-.02.66-.21.19-.2.82-.95 1.04-1.28.22-.33.44-.28.74-.17.3.11 1.91.9 2.24 1.06.33.16.55.24.63.38.08.14.08.8-.13 1.38z"/>
+          </svg>
         </a>
         <a href="tel:+27612832392" class="comm-btn-icon icon-call" aria-label="Call">
-          <svg viewBox="0 0 24 24"><path d="M18.48 22.926c-4.947 0-9.893-3.415-13.337-6.859-3.444-3.444-6.859-8.39-6.859-13.337 0-1.854.767-3.619 2.158-5.01 1.042-1.041 2.502-1.72 3.864-1.72.766 0 1.464.316 1.954.806l2.903 2.903c.485.485.801 1.184.801 1.94 0 .765-.316 1.463-.806 1.954l-1.32 1.32c.513 1.15 1.353 2.301 2.376 3.325 1.024 1.024 2.174 1.863 3.325 2.376l1.32-1.32c.491-.491 1.189-.806 1.954-.806.756 0 1.456.315 1.941.8l2.903 2.903c.49.49.806 1.188.806 1.954 0 1.362-.679 2.822-1.72 3.864-1.391 1.391-3.156 2.158-5.01 2.158z"/></svg>
+          <svg viewBox="0 0 24 24">
+            <path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+          </svg>
         </a>
       </div>
     </div>
 
     <footer>
       <p class="brand-signature">WILDCODE ARCHITECTS</p>
-      <p>&copy; 2026 WildCode. Secure Deployment Confirmed.</p>
+      <p>Building Modern Websites For Growing Businesses.</p>
+      <p>&copy; 2026 WildCode.</p>
     </footer>
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const lazyImages = document.querySelectorAll("img.lazy-load");
-        if ("IntersectionObserver" in window) {
-          const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.getAttribute("data-src");
-                img.classList.remove("lazy-load");
-                obs.unobserve(img);
-              }
-            });
-          });
-          lazyImages.forEach(img => observer.observe(img));
-        } else {
-          lazyImages.forEach(img => img.src = img.getAttribute("data-src"));
-        }
-
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
+        
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
-        const columns = Math.floor(width / 24);
-        const yPositions = Array(columns).fill(0);
+        
+        let fontHeightSize = 15;
+        let columns = Math.floor(width / 24);
+        let yPositions = Array(columns).fill(0);
+        
+        let frameToggle = false;
 
         function matrixRain() {
-          ctx.fillStyle = 'rgba(3, 7, 18, 0.035)';
-          ctx.fillRect(0, 0, width, height);
-          ctx.fillStyle = '#00ffcc';
-          ctx.font = '15px monospace';
+          frameToggle = !frameToggle;
+          if (frameToggle) {
+            ctx.fillStyle = 'rgba(3, 7, 18, 0.04)';
+            ctx.fillRect(0, 0, width, height);
+            ctx.fillStyle = '#00ffcc';
+            ctx.font = fontHeightSize + 'px monospace';
 
-          for (let i = 0; i < yPositions.length; i++) {
-            const text = String.fromCharCode(Math.floor(Math.random() * 93) + 33);
-            const x = i * 24;
-            const y = yPositions[i];
-            ctx.fillText(text, x, y);
+            for (let i = 0; i < yPositions.length; i++) {
+              const text = String.fromCharCode(Math.floor(Math.random() * 93) + 33);
+              const x = i * 24;
+              const y = yPositions[i];
+              ctx.fillText(text, x, y);
 
-            if (y > height && Math.random() > 0.975) {
-              yPositions[i] = 0;
-            } else {
-              yPositions[i] += 4;
+              if (y > height && Math.random() > 0.975) {
+                yPositions[i] = 0;
+              } else {
+                yPositions[i] += 4;
+              }
             }
           }
           requestAnimationFrame(matrixRain);
         }
+        
         requestAnimationFrame(matrixRain);
 
         window.addEventListener('resize', () => {
           width = canvas.width = window.innerWidth;
           height = canvas.height = window.innerHeight;
+          columns = Math.floor(width / 24);
+          yPositions = Array(columns).fill(0);
         }, { passive: true });
       });
 
