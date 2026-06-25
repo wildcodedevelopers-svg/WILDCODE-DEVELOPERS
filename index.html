@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://wildcode.co.za/">
     <meta property="og:title" content="Wild Code | Premium Web Development Studio">
     <meta property="og:description" content="Clean code. Stunning aesthetics. Elite performance. We build websites that dominate search results and maximize conversions.">
-    <meta property="og:image" content="https://i.ibb.co/tw05khGn/1779331928462.png">
+    <meta property="og:image" content="https://i.ibb.co/SXh5dcm6/1782383862681.png">
 
     <meta name="google-site-verification" content="A_7FE_Nvq47k6zbuhWZnyFJ-UxYtbaCT1uRiY_MfPVg" />
     <meta name="google-site-verification" content="90Olse0Gv2p7jjXHzbPtim0IYC_A9bGo-jSfBLe1IUg" />
@@ -21,8 +21,8 @@
 
     <style>
       :root {
-        --bg-dark: #030712;
-        --card-bg: rgba(6, 11, 25, 0.65);
+        --bg-dark: #02040a;
+        --card-bg: rgba(6, 11, 25, 0.75);
         --primary: #0055ff;
         --primary-glow: rgba(0, 85, 255, 0.4);
         --accent: #00ffcc;
@@ -41,6 +41,15 @@
 
       body {
         background-color: var(--bg-dark);
+        /* Premium deep-tech gradient background with a clean vector grid pattern */
+        background-image: 
+          radial-gradient(circle at 50% 0%, rgba(0, 85, 255, 0.15), transparent 50%),
+          radial-gradient(circle at 0% 100%, rgba(0, 255, 204, 0.05), transparent 40%),
+          linear-gradient(to bottom, rgba(2, 4, 10, 0.8), var(--bg-dark)),
+          linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+        background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+        background-attachment: fixed;
         color: var(--text-main);
         font-family: var(--font-sans);
         line-height: 1.75;
@@ -49,18 +58,6 @@
         margin: 0 auto;
         overflow-x: hidden;
         position: relative;
-      }
-
-      #matrixCanvas {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        z-index: -1 !important;
-        opacity: 0.35 !important;
-        pointer-events: none !important;
-        display: block !important;
       }
 
       .hero-section {
@@ -72,23 +69,24 @@
       }
 
       .shifting-hero-text {
-        font-size: clamp(2rem, 6vw, 3.5rem);
-        margin-bottom: 15px;
+        font-size: clamp(2.5rem, 7vw, 4.5rem);
+        font-weight: 700;
+        margin-bottom: 20px;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 2px;
         font-family: var(--font-display);
         animation: colorShift 6s ease-in-out infinite alternate;
-        line-height: 1.2;
+        line-height: 1.1;
       }
 
       @keyframes colorShift {
         0% {
           color: var(--accent);
-          text-shadow: 0 0 20px var(--accent-glow);
+          text-shadow: 0 0 30px var(--accent-glow);
         }
         100% {
           color: var(--primary);
-          text-shadow: 0 0 20px var(--primary-glow);
+          text-shadow: 0 0 30px var(--primary-glow);
         }
       }
 
@@ -155,20 +153,20 @@
 
       .section-card {
         background: var(--card-bg);
-        border: 1px solid rgba(0, 85, 255, 0.15);
+        border: 1px solid rgba(0, 85, 255, 0.2);
         border-radius: 24px;
         padding: clamp(22px, 4.5vw, 40px);
         margin-bottom: 35px;
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.05);
         position: relative;
         z-index: 2;
       }
 
       .logo-container {
         text-align: center;
-        margin: 20px 0 25px 0;
+        margin: 30px 0 35px 0;
         display: flex;
         justify-content: center;
         position: relative;
@@ -180,8 +178,7 @@
         max-width: 650px;
         height: auto;
         border-radius: 14px;
-        mix-blend-mode: screen;
-        filter: contrast(1.25) brightness(1.1) drop-shadow(0 0 25px rgba(0, 85, 255, 0.25));
+        filter: drop-shadow(0 0 30px rgba(0, 85, 255, 0.3));
       }
 
       h1 {
@@ -593,7 +590,6 @@
         text-transform: uppercase;
       }
 
-      /* Active Interactive Link Wrapping for direct Actions */
       .direct-contact-action-link {
         color: var(--accent) !important;
         text-decoration: underline !important;
@@ -691,16 +687,14 @@
     </style>
   </head>
   <body>
-
-    <canvas id="matrixCanvas"></canvas>
     
     <div class="logo-container">
-      <img src="https://i.ibb.co/tw05khGn/1779331928462.png" alt="WildCode Elite Systems Logo" width="650" height="216">
+      <img src="https://i.ibb.co/SXh5dcm6/1782383862681.png" alt="WildCode Elite Systems Logo" width="650" height="216">
     </div>
 
     <div class="hero-section">
       <h1 class="shifting-hero-text">
-        Websites That Grow Businesses
+        Build. Scale. Dominate.
       </h1>
       <p style="text-align:center;max-width:700px;margin:auto;color:#94a3b8;font-size:clamp(1.1rem, 3vw, 1.25rem);">
         Professional websites designed to attract customers, build credibility, and help your business grow online.
@@ -1032,53 +1026,6 @@
     </footer>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const canvas = document.getElementById('matrixCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-        
-        let fontHeightSize = 15;
-        let columns = Math.floor(width / 24);
-        let yPositions = Array(columns).fill(0);
-        
-        let frameToggle = false;
-
-        function matrixRain() {
-          frameToggle = !frameToggle;
-          if (frameToggle) {
-            ctx.fillStyle = 'rgba(3, 7, 18, 0.04)';
-            ctx.fillRect(0, 0, width, height);
-            ctx.fillStyle = '#00ffcc';
-            ctx.font = fontHeightSize + 'px monospace';
-
-            for (let i = 0; i < yPositions.length; i++) {
-              const text = String.fromCharCode(Math.floor(Math.random() * 93) + 33);
-              const x = i * 24;
-              const y = yPositions[i];
-              ctx.fillText(text, x, y);
-
-              if (y > height && Math.random() > 0.975) {
-                yPositions[i] = 0;
-              } else {
-                yPositions[i] += 4;
-              }
-            }
-          }
-          requestAnimationFrame(matrixRain);
-        }
-        
-        requestAnimationFrame(matrixRain);
-
-        window.addEventListener('resize', () => {
-          width = canvas.width = window.innerWidth;
-          height = canvas.height = window.innerHeight;
-          columns = Math.floor(width / 24);
-          yPositions = Array(columns).fill(0);
-        }, { passive: true });
-      });
-
       function toggleFaq(button) {
         button.parentElement.classList.toggle('active');
       }
