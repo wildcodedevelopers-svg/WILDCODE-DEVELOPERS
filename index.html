@@ -18,11 +18,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
       :root {
-        --bg-dark: #02040a;
-        --card-bg: rgba(6, 11, 25, 0.65);
+        --bg-dark: #050505;
+        --card-bg: rgba(6, 11, 25, 0.75);
         --primary: #0055ff;
         --primary-glow: rgba(0, 85, 255, 0.4);
         --accent: #00ffcc;
@@ -41,80 +42,60 @@
 
       body {
         background-color: var(--bg-dark);
+        background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+        background-size: 24px 24px;
+        background-attachment: fixed;
         color: var(--text-main);
         font-family: var(--font-sans);
         line-height: 1.75;
-        padding: 20px 12px 140px 12px;
-        max-width: 1100px;
+        padding: 60px 20px 140px 20px;
+        max-width: 1200px;
         margin: 0 auto;
         overflow-x: hidden;
         position: relative;
       }
 
-      /* Animated Loop Background System */
-      .bg-matrix-loop {
+      /* Animated Laser Scan Line Overlay */
+      .scanline-system {
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        z-index: -1;
-        overflow: hidden;
-        background: var(--bg-dark);
+        z-index: 0;
         pointer-events: none;
       }
 
-      .bg-matrix-loop::before {
-        content: '';
-        position: absolute;
-        width: 200%;
-        height: 200%;
-        top: -50%;
-        left: -50%;
-        background-image: 
-          linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-        background-size: 50px 50px;
-        transform: rotate(15deg);
-        animation: gridLoop 24s linear infinite;
-      }
-
-      .bg-matrix-loop::after {
+      .scanline-system::after {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
-        background: 
-          radial-gradient(circle at 20% 30%, rgba(0, 85, 255, 0.15), transparent 40%),
-          radial-gradient(circle at 80% 70%, rgba(0, 255, 204, 0.1), transparent 45%),
-          radial-gradient(circle at 50% 50%, rgba(2, 4, 10, 0.2), var(--bg-dark));
-        animation: glowLoop 12s ease-in-out infinite alternate;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(0, 85, 255, 0.4), transparent);
+        box-shadow: 0 0 12px rgba(0, 85, 255, 0.6);
+        animation: scanLineMove 6s linear infinite;
       }
 
-      @keyframes gridLoop {
-        0% { transform: rotate(15deg) translateY(0); }
-        100% { transform: rotate(15deg) translateY(50px); }
-      }
-
-      @keyframes glowLoop {
-        0% { filter: hue-rotate(0deg) brightness(1); }
-        100% { filter: hue-rotate(45deg) brightness(1.2); }
+      @keyframes scanLineMove {
+        0% { top: -2px; }
+        100% { top: 100%; }
       }
 
       .hero-section {
-        margin: 0 auto 40px auto;
+        margin: 40px auto 60px auto;
         padding: 0 10px;
         position: relative;
         z-index: 1;
         text-align: center;
+        max-width: 850px;
       }
 
       .shifting-hero-text {
-        font-size: clamp(2.5rem, 7vw, 4.5rem);
+        font-size: clamp(2.5rem, 6.5vw, 4.8rem);
         font-weight: 700;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
         text-transform: uppercase;
         letter-spacing: 2px;
         font-family: var(--font-display);
@@ -128,39 +109,53 @@
       }
 
       .hero-cta-box {
-        margin: 30px auto 25px auto;
+        margin: 35px auto 30px auto;
         display: inline-block;
         width: 100%;
         max-width: 380px;
       }
 
+      /* Dark Luxury Glowing WhatsApp CTA */
       .hero-wa-btn {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 12px;
         font-family: var(--font-display);
-        background: #1ea94b;
+        background: #050505;
         color: #ffffff;
         font-weight: 700;
         text-decoration: none;
-        padding: 18px 32px;
+        padding: 20px 32px;
         font-size: clamp(1.1rem, 3vw, 1.25rem);
         border-radius: 50px;
-        letter-spacing: 1px;
-        box-shadow: 0 10px 30px rgba(30, 169, 75, 0.35);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        letter-spacing: 1.5px;
+        border: 2px solid var(--accent);
+        box-shadow: 0 0 15px rgba(0, 255, 204, 0.3), inset 0 0 10px rgba(0, 255, 204, 0.1);
+        transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s, transform 0.2s, box-shadow 0.2s;
       }
 
-      .hero-wa-btn:active { transform: scale(0.98); }
+      .hero-wa-btn:hover { 
+        transform: translateY(-3px); 
+        box-shadow: 0 0 25px rgba(0, 255, 204, 0.6), inset 0 0 15px rgba(0, 255, 204, 0.2); 
+      }
+      
+      /* Active state transforms background completely green */
+      .hero-wa-btn:active { 
+        transform: scale(0.98); 
+        background: #1ea94b; 
+        border-color: #1ea94b; 
+        color: #ffffff;
+        box-shadow: 0 5px 25px rgba(30, 169, 75, 0.8);
+      }
       .hero-wa-btn svg { width: 24px; height: 24px; fill: currentColor; }
 
       .hero-trust-badges {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 12px 24px;
-        margin-top: 25px;
+        gap: 12px 30px;
+        margin-top: 35px;
         padding: 10px;
       }
 
@@ -182,18 +177,18 @@
         background: var(--card-bg);
         border: 1px solid rgba(0, 85, 255, 0.2);
         border-radius: 24px;
-        padding: clamp(22px, 4.5vw, 40px);
-        margin-bottom: 35px;
+        padding: clamp(24px, 5vw, 50px);
+        margin-bottom: 40px;
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.05);
         position: relative;
         z-index: 2;
       }
 
       .logo-container {
         text-align: center;
-        margin: 30px 0 35px 0;
+        margin: 20px 0 45px 0;
         display: flex;
         justify-content: center;
         position: relative;
@@ -202,20 +197,20 @@
 
       .logo-container img {
         width: 100%;
-        max-width: 650px;
+        max-width: 580px;
         height: auto;
         border-radius: 14px;
-        filter: drop-shadow(0 0 30px rgba(0, 85, 255, 0.3));
+        filter: drop-shadow(0 0 35px rgba(0, 85, 255, 0.35));
       }
 
       h2 {
         font-family: var(--font-display);
         color: var(--accent);
-        font-size: clamp(1.4rem, 4vw, 1.8rem);
+        font-size: clamp(1.4rem, 4vw, 1.9rem);
         font-weight: 700;
         letter-spacing: 1px;
         text-transform: uppercase;
-        margin-bottom: 25px;
+        margin-bottom: 30px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         padding-bottom: 15px;
         display: flex;
@@ -229,7 +224,7 @@
         font-family: var(--font-display);
         color: #ffffff;
         font-size: clamp(1.25rem, 3.5vw, 1.45rem); 
-        margin-top: 30px;
+        margin-top: 10px;
         margin-bottom: 15px;
         display: flex;
         align-items: center;
@@ -249,28 +244,44 @@
       h4 { font-family: var(--font-display); color: var(--accent); font-size: 1.4rem; margin-top: 30px; margin-bottom: 20px; }
       p { margin-bottom: 20px; color: var(--text-muted); font-size: clamp(1.05rem, 2.8vw, 1.15rem); }
       b, strong { color: #ffffff; }
-      hr { border: 0; height: 1px; background: linear-gradient(to right, transparent, var(--primary), var(--accent), var(--primary), transparent); margin: 40px 0; }
+      hr { border: 0; height: 1px; background: linear-gradient(to right, transparent, var(--primary), var(--accent), var(--primary), transparent); margin: 45px 0; }
+
+      .services-grid-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+      }
+
+      @media (max-width: 600px) {
+        .services-grid-wrapper {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .services-group .service-block {
+        background: rgba(255, 255, 255, 0.01);
+        padding: clamp(20px, 4vw, 30px);
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
 
       .img-wrapper {
         position: relative;
         overflow: hidden;
         border-radius: 14px;
         border: 1px solid rgba(255, 255, 255, 0.05);
-        margin: 20px 0;
+        margin: 15px 0 20px 0;
         background: #060b19;
         aspect-ratio: 16 / 9;
         width: 100%;
       }
 
-      img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-      .services-group .service-block {
-        background: rgba(255, 255, 255, 0.01);
-        padding: clamp(18px, 3.5vw, 25px);
-        border-radius: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.03);
-        margin-bottom: 25px;
-      }
+      img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+      .img-wrapper:hover img { transform: scale(1.04); }
 
       .feature-list {
         display: grid;
@@ -290,16 +301,21 @@
         font-weight: 600;
         font-size: clamp(1.05rem, 2.5vw, 1.15rem);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       }
 
+      .feature-item:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 20px 35px rgba(0, 255, 204, 0.15); }
       .feature-item span { color: var(--accent); margin-right: 14px; font-size: 1.4rem; text-shadow: 0 0 12px var(--accent-glow); }
 
-      .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 25px; list-style: none; }
-      .project-card { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.04); padding: 20px; border-radius: 18px; display: flex; flex-direction: column; }
+      .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 25px; list-style: none; }
+      .project-card { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.04); padding: 20px; border-radius: 18px; display: flex; flex-direction: column; transition: transform 0.3s ease, border-color 0.3s ease; }
+      .project-card:hover { background: rgba(6, 11, 25, 0.8); border-color: rgba(0, 85, 255, 0.4); transform: translateY(-4px); }
       .project-card b { font-family: var(--font-display); font-size: 1.3rem; color: var(--accent); display: block; margin-bottom: 12px; letter-spacing: 0.5px; }
 
-      .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 24px; }
-      .profile-card { background: rgba(6, 11, 25, 0.8); border: 1px solid rgba(0, 85, 255, 0.15); border-left: 4px solid var(--accent); padding: 24px; border-radius: 16px; display: flex; flex-direction: column; justify-content: space-between; }
+      .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr)); gap: 25px; }
+      @media (max-width: 950px) { .profile-grid { grid-template-columns: 1fr; } }
+      .profile-card { background: rgba(6, 11, 25, 0.8); border: 1px solid rgba(0, 85, 255, 0.15); border-left: 4px solid var(--accent); padding: 30px; border-radius: 16px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s ease, border-color 0.3s ease; }
+      .profile-card:hover { border-color: var(--accent); transform: translateY(-3px); }
       .profile-card h3 { margin-top: 0; color: var(--accent); font-size: 1.2rem; letter-spacing: 0.5px; margin-bottom: 15px; }
       .profile-card h3::before { display: none; }
       .profile-metric-list { list-style: none; margin-top: 10px; margin-bottom: 20px; }
@@ -314,7 +330,7 @@
         border: 1px solid var(--primary);
         color: #ffffff;
         text-decoration: none;
-        padding: 12px 20px;
+        padding: 14px 24px;
         border-radius: 8px;
         font-family: var(--font-display);
         font-weight: 600;
@@ -322,9 +338,11 @@
         letter-spacing: 0.5px;
         margin-top: auto;
         text-transform: uppercase;
+        transition: background 0.2s, border-color 0.2s;
       }
+      .project-link-btn:hover { background: var(--primary); border-color: #ffffff; }
 
-      .testimonial-box { background: rgba(0, 255, 204, 0.03); border: 1px dashed rgba(0, 255, 204, 0.2); padding: 16px; border-radius: 12px; margin-top: 20px; position: relative; }
+      .testimonial-box { background: rgba(0, 255, 204, 0.03); border: 1px dashed rgba(0, 255, 204, 0.2); padding: 18px; border-radius: 12px; margin-top: 20px; position: relative; }
       .testimonial-text { font-style: italic; color: var(--text-main); font-size: 1rem; margin-bottom: 8px; line-height: 1.6; }
       .testimonial-author { font-family: var(--font-display); font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; display: block; text-align: right; font-weight: 700; }
 
@@ -359,9 +377,11 @@
         pointer-events: auto;
         display: inline-block;
         text-transform: uppercase;
+        transition: transform 0.3s elements, box-shadow 0.3s;
       }
+      #formToggleBtn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 255, 204, 0.45); }
 
-      #projectFormContainer { display: none; background: #050b18; border: 1px solid var(--accent); padding: clamp(22px, 4.5vw, 40px); border-radius: 20px; margin: 25px 0; position: relative; z-index: 25; }
+      #projectFormContainer { display: none; background: #050b18; border: 1px solid var(--accent); padding: clamp(22px, 4.5vw, 40px); border-radius: 20px; margin: 35px 0; position: relative; z-index: 25; }
       .form-grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 0 20px; }
       #projectFormContainer label { display: block; margin-bottom: 10px; color: #ffffff; font-weight: 600; font-size: 1.05rem; }
       
@@ -394,102 +414,66 @@
 
       .direct-contact-action-link { color: var(--accent) !important; text-decoration: underline !important; font-weight: bold !important; display: inline-block; }
 
-      /* Comm Dock System */
-      .comm-dock {
-        position: fixed !important;
-        bottom: 24px !important;
-        left: 50% !important;
-        transform: translate(-50%, 0) !important;
-        background: rgba(6, 11, 25, 0.95) !important;
-        backdrop-filter: blur(24px) !important;
-        -webkit-backdrop-filter: blur(24px) !important;
-        border: 1px solid rgba(0, 255, 204, 0.3) !important;
-        padding: 14px 28px !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 20px !important;
-        z-index: 2147483643 !important;
-        border-radius: 100px !important;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95) !important;
-        width: calc(100% - 24px) !important;
-        max-width: 400px !important;
-        justify-content: space-between !important;
-        transition: left 0.3s ease, transform 0.3s ease;
-      }
-
-      .comm-dock-label { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
-      .comm-icons-group { display: flex; gap: 14px; }
-      
-      .comm-btn-icon {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 46px !important;
-        height: 46px !important;
-        border-radius: 50% !important;
-        color: #fff !important;
-        text-decoration: none !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      }
-
-      .comm-btn-icon svg { width: 24px !important; height: 24px !important; fill: currentColor !important; }
-      .icon-whatsapp { background-color: #1ea94b !important; }
-      .icon-call { background-color: #004fe5 !important; }
-
-      /* Chals Application Overlay Card Layout - Centered Configuration */
-      .chals-toggle-container {
+      /* Action Dock Layouts */
+      .action-dock-container {
         position: fixed;
-        bottom: 100px;
-        right: 24px;
-        z-index: 2147483646;
+        bottom: 30px;
+        right: 30px;
         display: flex;
-        align-items: center;
-        gap: 12px;
+        flex-direction: column;
+        gap: 16px;
+        z-index: 2147483647;
       }
 
-      .chals-toggle-label-btn {
-        background: rgba(6, 11, 25, 0.9);
-        border: 1px solid rgba(0, 255, 204, 0.3);
-        font-family: var(--font-display);
-        color: var(--accent);
-        font-weight: 700;
-        font-size: 0.95rem;
-        letter-spacing: 0.5px;
-        padding: 10px 20px;
-        border-radius: 20px;
-        cursor: pointer;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-        transition: all 0.2s ease;
-      }
-
-      .chals-toggle-circle-btn {
+      .glow-action-btn {
         width: 56px;
         height: 56px;
-        background: linear-gradient(135deg, var(--primary), var(--accent));
-        border: none;
         border-radius: 50%;
-        cursor: pointer;
+        background-color: #060b19;
+        border: 2px solid transparent;
+        color: #ffffff;
+        font-size: 20px;
         display: flex;
-        align-items: center;
         justify-content: center;
-        color: #fff;
-        box-shadow: 0 0 20px var(--primary-glow), 0 5px 15px rgba(0, 0, 0, 0.4);
-        transition: transform 0.2s ease;
+        align-items: center;
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s;
+        animation: baseline-glow-loop 4s ease-in-out infinite;
       }
-      
-      .chals-toggle-circle-btn:active { transform: scale(0.92); }
-      .chals-toggle-circle-btn svg { width: 26px; height: 26px; fill: currentColor; }
 
-      /* Chals Layout Shifted Directly to the Middle of the Screen */
+      .glow-action-btn:hover { transform: scale(1.08) translateY(-2px); background-color: #0d1527; }
+
+      /* Reconstructed Ask Chals Floating Branding Hook */
+      .ai-glow-btn { 
+        width: auto;
+        padding: 0 16px;
+        border-radius: 30px;
+        animation: intense-glow-loop 3s ease-in-out infinite; 
+      }
+      .ai-glow-btn span { font-family: var(--font-display); font-size: 12px; font-weight: 800; letter-spacing: 1px; white-space: nowrap; }
+
+      @keyframes baseline-glow-loop {
+        0%, 100% { border-color: #0055ff; box-shadow: 0 0 12px rgba(0, 85, 255, 0.5), inset 0 0 6px rgba(0, 85, 255, 0.2); }
+        50% { border-color: #00ffcc; box-shadow: 0 0 12px rgba(0, 255, 204, 0.5), inset 0 0 6px rgba(0, 255, 204, 0.2); }
+      }
+
+      @keyframes intense-glow-loop {
+        0%, 100% { border-color: #0055ff; box-shadow: 0 0 22px rgba(0, 85, 255, 0.9), inset 0 0 8px rgba(0, 85, 255, 0.4); color: #0055ff; }
+        50% { border-color: #00ffcc; box-shadow: 0 0 22px rgba(0, 255, 204, 0.9), inset 0 0 8px rgba(0, 255, 204, 0.4); color: #00ffcc; }
+      }
+
+      /* Chals Interface Window Frameworks */
       .chals-chat-window {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(0.9);
         width: calc(100% - 32px);
-        max-width: 460px;
-        height: 600px;
+        max-width: 480px;
+        height: 620px;
         background: #040814;
         border: 1px solid rgba(0, 255, 204, 0.3);
         border-radius: 24px;
@@ -503,20 +487,15 @@
         transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.3s;
       }
       
-      .chals-chat-window.open {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-        visibility: visible;
-      }
+      .chals-chat-window.open { transform: translate(-50%, -50%) scale(1); opacity: 1; visibility: visible; }
 
-      /* Dimmer Blur Overlay Background when Chals Mid-Screen is Activated */
       .chals-screen-blur-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: rgba(2, 4, 10, 0.6);
+        background: rgba(2, 4, 10, 0.65);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
         z-index: 2147483644;
@@ -525,10 +504,7 @@
         transition: opacity 0.3s ease, visibility 0.3s;
       }
 
-      .chals-screen-blur-overlay.active {
-        opacity: 1;
-        visibility: visible;
-      }
+      .chals-screen-blur-overlay.active { opacity: 1; visibility: visible; }
 
       .chals-header {
         background: linear-gradient(to bottom, rgba(0, 85, 255, 0.15), transparent);
@@ -614,29 +590,14 @@
 
       @media (max-width: 480px) {
         .chals-chat-window { height: 80vh; width: calc(100% - 24px); }
-        .chals-toggle-container { right: 12px; bottom: 95px; }
-      }
-
-      @media (min-width: 600px) {
-        body { padding: 40px 20px 140px 20px; }
-        .comm-dock { width: auto !important; max-width: none !important; justify-content: center !important; gap: 24px !important; padding: 14px 32px !important; }
-        .comm-btn-icon { width: 48px !important; height: 48px !important; }
-        .project-card:hover { background: rgba(6, 11, 25, 0.8); border-color: rgba(0, 85, 255, 0.4); transform: translateY(-4px); transition: transform 0.3s ease, border-color 0.3s ease; }
-        .profile-card:hover { border-color: var(--accent); transform: translateY(-3px); transition: transform 0.3s ease, border-color 0.3s ease; }
-        .project-link-btn:hover { background: var(--primary); border-color: #ffffff; }
-        .feature-item:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 20px 35px rgba(0, 255, 204, 0.15); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
-        .img-wrapper:hover img { transform: scale(1.02); }
-        #formToggleBtn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 255, 204, 0.45); }
-        .hero-wa-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(30, 169, 75, 0.5); }
-        .chals-toggle-label-btn:hover { border-color: var(--accent); color: #fff; }
-        .chals-toggle-circle-btn:hover { transform: scale(1.05); }
+        .action-dock-container { right: 16px; bottom: 16px; gap: 12px; }
+        body { padding: 30px 12px 140px 12px; }
       }
     </style>
   </head>
   <body>
 
-    <!-- Loop Grid Overlay Backer -->
-    <div class="bg-matrix-loop"></div>
+    <div class="scanline-system"></div>
     
     <div class="logo-container">
       <img src="https://i.ibb.co/SXh5dcm6/1782383862681.png" alt="WildCode Elite Systems Logo" width="650" height="216">
@@ -668,42 +629,52 @@
       <div class="img-wrapper">
         <img src="https://i.ibb.co/hRTKv85G/istockphoto-1435220822-612x612.jpg" alt="Production Lab">
       </div>
-      <p><b>WildCode</b> is an elite web development studio run by Mr W.C. Magwenzi, based in South Africa. We specialize in building modern, high-performance websites for businesses, entrepreneurs, and creators worldwide. We don't just build websites; we engineer digital experiences that convert. With a focus on pristine code, bold design, and uncompromising performance, WildCode delivers the technical excellence your brand deserves.</p>
+      <p><b>WildCode</b> is an elite web development studio based in South Africa. We specialize in building modern, high-performance websites for businesses, entrepreneurs, and creators worldwide. We don't just build websites; we engineer digital experiences that convert. With a focus on pristine code, bold design, and uncompromising performance, WildCode delivers the technical excellence your brand deserves.</p>
     </div>
     
     <div class="section-card services-group">
       <h2>OUR SERVICES</h2>
       
-      <div class="service-block">
-        <h3>Modern Website Design</h3>
-        <div class="img-wrapper">
-          <img src="https://i.ibb.co/SXsZ7yBy/web-designing-1024x683.jpg" alt="UI Design">
+      <div class="services-grid-wrapper">
+        <div class="service-block">
+          <div>
+            <h3>Modern Website Design</h3>
+            <div class="img-wrapper">
+              <img src="https://i.ibb.co/SXsZ7yBy/web-designing-1024x683.jpg" alt="UI Design">
+            </div>
+          </div>
+          <p>We create beautiful, user-friendly websites that reflect your brand and provide a smooth experience for your visitors.</p>
         </div>
-        <p>We create beautiful, user-friendly websites that reflect your brand and provide a smooth experience for your visitors.</p>
-      </div>
-      
-      <div class="service-block">
-        <h3>Mobile-Friendly Development</h3>
-        <div class="img-wrapper">
-          <img src="https://i.ibb.co/FL65PcWs/A-Complete-Guide-to-Responsive-Web-Development-in-2023-2.jpg" alt="Responsive Build">
+        
+        <div class="service-block">
+          <div>
+            <h3>Mobile-Friendly Development</h3>
+            <div class="img-wrapper">
+              <img src="https://i.ibb.co/FL65PcWs/A-Complete-Guide-to-Responsive-Web-Development-in-2023-2.jpg" alt="Responsive Build">
+            </div>
+          </div>
+          <p>Every website is fully responsive and works perfectly on phones, tablets, laptops, and desktop computers.</p>
         </div>
-        <p>Every website is fully responsive and works perfectly on phones, tablets, laptops, and desktop computers.</p>
-      </div>
-      
-      <div class="service-block">
-        <h3>Landing Pages That Convert</h3>
-        <div class="img-wrapper">
-          <img src="https://i.ibb.co/S1Jkqrx/Landing-Page-Examples.png" alt="Landing Matrices">
+        
+        <div class="service-block">
+          <div>
+            <h3>Landing Pages That Convert</h3>
+            <div class="img-wrapper">
+              <img src="https://i.ibb.co/S1Jkqrx/Landing-Page-Examples.png" alt="Landing Matrices">
+            </div>
+          </div>
+          <p>We build landing pages that help businesses generate more leads, enquiries, and sales.</p>
         </div>
-        <p>We build landing pages that help businesses generate more leads, enquiries, and sales.</p>
-      </div>
 
-      <div class="service-block">
-        <h3>Business Websites</h3>
-        <div class="img-wrapper">
-          <img src="https://i.ibb.co/Kp1tWSym/Creating-Visually-Stunning-and-Functional-Business-Websites.jpg" alt="Business Portals">
+        <div class="service-block">
+          <div>
+            <h3>Business Websites</h3>
+            <div class="img-wrapper">
+              <img src="https://i.ibb.co/Kp1tWSym/Creating-Visually-Stunning-and-Functional-Business-Websites.jpg" alt="Business Portals">
+            </div>
+          </div>
+          <p>Professional websites that help businesses build credibility, showcase services, and attract new customers.</p>
         </div>
-        <p>Professional websites that help businesses build credibility, showcase services, and attract new customers.</p>
       </div>
        
       <hr>
@@ -758,7 +729,7 @@
         
         <div class="profile-card">
           <div>
-            <h3>PROJECT: SMARTIE PANTS INCLUSIVE LEARNING CENTER</h3>
+            <h3>PROJECT: SMARTIE PANTS Inclusive Learning Center</h3>
             <ul class="profile-metric-list">
               <li><span>✓</span> Responsive Design</li>
               <li><span>✓</span> Mobile Friendly</li>
@@ -951,34 +922,20 @@
       </p>
     </div>
 
-    <div class="comm-dock">
-      <span class="comm-dock-label">Contact Now</span>
-      <div class="comm-icons-group">
-        <a href="https://wa.me/27612832392" class="comm-btn-icon icon-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24">
-            <path fill="currentColor" d="M12.004 2c-5.51 0-9.99 4.49-9.99 10 0 1.77.46 3.49 1.34 5.02L2 22l5.14-1.35c1.48.81 3.14 1.24 4.86 1.24 5.51 0 9.99-4.49 9.99-10S17.52 2 12.004 2zm3.86 14.22c-.21.58-1.21 1.13-1.67 1.19-.46.06-.9.1(3.04-.74-2.58-1.01-4.21-3.63-4.34-3.8-.13-.18-1.04-1.38-1.04-2.63 0-1.25.65-1.87.88-2.13.23-.26.5-.32.67-.32.17 0 .34.01.49.02.16.01.37-.06.58.45.22.54.75 1.83.82 1.96.07.13.11.29.02.48-.09.18-.14.3-.28.46-.14.16-.3.36-.43.49-.15.15-.31.31-.13.62.18.3.81 1.33 1.74 2.16.15.13.88.77 1.63.85.25.02.48-.02.66-.21.19-.2.82-.95 1.04-1.28.22-.33.44-.28.74-.17.3.11 1.91.9 2.24 1.06.33.16.55.24.63.38.08.14.08.8-.13 1.38z"/>
-          </svg>
-        </a>
-        <a href="tel:+27612832392" class="comm-btn-icon icon-call" aria-label="Call">
-          <svg viewBox="0 0 24 24">
-            <path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Background Dimming Overlay component for centered chat layout context -->
     <div class="chals-screen-blur-overlay" id="chalsBlurOverlay" onclick="toggleChalsChat()"></div>
 
-    <!-- CHALS CHAT OVERLAY CARD -->
-    <div class="chals-toggle-container" id="chalsToggleGroup">
-      <button class="chals-toggle-label-btn" onclick="toggleChalsChat()">Ask Chals</button>
-      <button class="chals-toggle-circle-btn" onclick="toggleChalsChat()" aria-label="Toggle Chals">
-        <svg viewBox="0 0 24 24" id="chalsIconSvg">
-          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/>
-          <circle cx="8" cy="10" r="1.5"/><circle cx="12" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/>
-        </svg>
+    <div class="action-dock-container">
+      <button class="glow-action-btn ai-glow-btn" onclick="toggleChalsChat()" title="Ask Chals AI">
+        <span>ASK CHALS</span>
       </button>
+
+      <a href="https://wa.me/27612832392" class="glow-action-btn" target="_blank" rel="noopener" title="WhatsApp Chat">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+
+      <a href="tel:+27612832392" class="glow-action-btn" title="Call Now">
+        <i class="fas fa-phone-alt"></i>
+      </a>
     </div>
 
     <div class="chals-chat-window" id="chalsWindow">
@@ -1039,121 +996,66 @@
         const formContainer = document.getElementById("projectFormContainer");
         formContainer.style.display = "block";
         formContainer.scrollIntoView({ behavior: 'smooth' });
-        
-        // Fully close the centered chat setup smoothly
         toggleChalsChat();
       }
 
-      /* ==========================================================================
-         CHALS CENTERED ENGINE WITH MATRIX FALLBACKS & SUBMIT INTERCEPTS
-         ========================================================================== */
-      const chalsKnowledge = [
-        { keys: ['how are you', 'how r u', 'how goes'], reply: "Operational matrices are functional and running at full capacity! 🤖 Thank you for asking. Ready to design, scale, and build your digital architecture. What details are we mapping out today? ✨" },
-        { keys: ['thanks', 'thank you', 'cool', 'awesome'], reply: "You're welcome! 😊 If you have any other questions, I'm right here. Ready to start your project? Reach Wayne on WhatsApp:\n[wa.me/27612832392](https://wa.me/27612832392) 💬" },
-        { keys: ['bye', 'goodbye', 'bye chals', 'exit'], reply: "Thanks for chatting! 👋 When you're ready to build something great, Wayne is just a message away. 🚀 Good luck!" },
-        { keys: ['hello', 'hi', 'hey'], reply: "Hello! Welcome to the main operational portal. 👋 I can walk you through pricing parameters, project deployment velocities, or layout strategies. What are we building? 🛠️" },
-        
-        { keys: ['who is wildcode', 'who is wayne', 'wildcode founder'], reply: "Great question! That's something best answered by Wayne directly. 👨‍💻 You can reach him on WhatsApp at [wa.me/27612832392](https://wa.me/27612832392) or email wildcoderobotics@gmail.com — he'll get back to you quickly! ⚡" },
-        
-        // Form link shortcut system
-        { keys: ['want a website', 'want website', 'buy website', 'need a website', 'build a website', 'get website', 'order website', 'website please'], reply: "Awesome! We are ready to build a high-performance system for you. 🔥 To lock in your spot and get started, please fill out our project request form right now! 📋👇\n\n<a href='#' class='chals-form-shortcut-btn' onclick='openAndScrollToForm(); return false;'>Click to Fill Project Form</a>" },
-
-        { keys: ['how much', 'cost', 'pricing', 'price'], reply: "Every project is highly unique! 💎 We provide clear, customized quotes matching your business goals. Our baseline brackets range from budget configurations under $300 up to comprehensive $3000+ complex business architectures. Tap **START YOUR PROJECT** to fetch an exact quote! 📊" },
-        { keys: ['how long', 'long does it take', 'timeline', 'days'], reply: "Most websites are delivered within **3–7 business days** from the time we receive your content (logo, text, images). ⏱️ Larger or more complex projects may take a bit longer. Need something urgently? Just mention it when you reach out! 🚀" },
-        { keys: ['services', 'what services', 'offer'], reply: "We build premium Business Websites, high-converting Landing Pages, E-commerce Stores, and custom portfolio hubs. 💻 All configurations are engineered to run lighting fast and mobile responsive. ⚡" },
-        { keys: ['own the website', 'do i own'], reply: "Yes, 100%. 🔑 Once the project is completed and final payment is made, full ownership of the website code, assets, and content belongs entirely to you. 🤝" },
-        { keys: ['seo', 'included'], reply: "Yes! 📈 All WildCode sites are built with SEO-ready structures, high-speed performance optimization, clean semantic HTML tag hierarchies, and metadata configured to help you rank on search engines. 🎯" }
-      ];
-
       function toggleChalsChat() {
-        const chatWindow = document.getElementById('chalsWindow');
-        const blurOverlay = document.getElementById('chalsBlurOverlay');
-        const iconSvg = document.getElementById('chalsIconSvg');
-        const isOpen = chatWindow.classList.contains('open');
-        
-        if (isOpen) {
-          chatWindow.classList.remove('open');
-          blurOverlay.classList.remove('active');
-          iconSvg.innerHTML = '<path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><circle cx="8" cy="10" r="1.5"/><circle cx="12" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/>';
-        } else {
-          chatWindow.classList.add('open');
-          blurOverlay.classList.add('active');
-          iconSvg.innerHTML = '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>';
-          const area = document.getElementById('chalsMsgArea');
-          area.scrollTop = area.scrollHeight;
-        }
+        const win = document.getElementById("chalsWindow");
+        const overlay = document.getElementById("chalsBlurOverlay");
+        win.classList.toggle("open");
+        overlay.classList.toggle("active");
       }
 
       function evaluateInputState() {
-        const input = document.getElementById('chalsInput');
-        const sendBtn = document.getElementById('chalsSendBtn');
-        if (input.value.trim().length > 0) {
-          sendBtn.classList.add('active-input');
+        const input = document.getElementById("chalsInput");
+        const btn = document.getElementById("chalsSendBtn");
+        if(input.value.trim().length > 0) {
+          btn.classList.add("active-input");
         } else {
-          sendBtn.classList.remove('active-input');
+          btn.classList.remove("active-input");
         }
-      }
-
-      function handleChipClick(text) {
-        addMessage(text, 'user');
-        processChalsReply(text);
       }
 
       function handleChalsKey(e) {
-        if (e.key === 'Enter') sendChalsMessage();
+        if(e.key === 'Enter') sendChalsMessage();
+      }
+
+      function handleChipClick(text) {
+        document.getElementById("chalsInput").value = text;
+        sendChalsMessage();
       }
 
       function sendChalsMessage() {
-        const input = document.getElementById('chalsInput');
-        const text = input.value.trim();
-        if (!text) return;
+        const input = document.getElementById("chalsInput");
+        const query = input.value.trim();
+        if(!query) return;
+
+        const area = document.getElementById("chalsMsgArea");
         
-        addMessage(text, 'user');
-        input.value = '';
+        const userDiv = document.createElement("div");
+        userDiv.className = "chals-msg user";
+        userDiv.textContent = query;
+        area.appendChild(userDiv);
+        
+        input.value = "";
         evaluateInputState();
-        processChalsReply(text);
-      }
-
-      function addMessage(text, sender) {
-        const area = document.getElementById('chalsMsgArea');
-        const msg = document.createElement('div');
-        msg.className = `chals-msg ${sender}`;
-        
-        let processedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        processedText = processedText.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-        
-        msg.innerHTML = processedText;
-        area.appendChild(msg);
         area.scrollTop = area.scrollHeight;
-        return msg;
-      }
-
-      function processChalsReply(query) {
-        const area = document.getElementById('chalsMsgArea');
-        const cleanQuery = query.toLowerCase();
-        
-        const indicator = document.createElement('div');
-        indicator.className = 'chals-msg bot chals-indicator';
-        indicator.innerHTML = '<div class="chals-dot"></div><div class="chals-dot"></div><div class="chals-dot"></div>';
-        area.appendChild(indicator);
-        area.scrollTop = area.scrollHeight;
-
-        // Custom unmatched question routing with fallback contact structures & emoticons
-        let finalReply = "Hmm, I don't recognize that question! 🤔 Please direct this inquiry to **Wayne** directly so he can help you build exactly what you need. 🚀\n\n📞 **Phone/WhatsApp:** [+27 612832392](https://wa.me/27612832392)\n✉️ **Email:** wildcoderobotics@gmail.com";
-        let found = false;
-
-        for (const item of chalsKnowledge) {
-          if (item.keys.some(k => cleanQuery.includes(k))) {
-            finalReply = item.reply;
-            found = true;
-            break;
-          }
-        }
 
         setTimeout(() => {
-          indicator.remove();
-          addMessage(finalReply, 'bot');
-        }, 750);
+          const botDiv = document.createElement("div");
+          botDiv.className = "chals-msg bot";
+          
+          let reply = "Got it! Let's build your project. You can lock in a direct consultation with Wayne right now by clicking below:";
+          if(query.toLowerCase().includes("cost") || query.toLowerCase().includes("budget") || query.toLowerCase().includes("much")) {
+            reply = "WildCode pricing is fully customized depending on project size and goals. Our budget ranges usually start anywhere from under $300 up to $3000+. Let's talk details via the main form!";
+          } else if(query.toLowerCase().includes("long") || query.toLowerCase().includes("time")) {
+            reply = "Most premium setups are completely ready and active within 3 to 7 business days depending on how quickly content milestones are completed.";
+          }
+
+          botDiv.innerHTML = `${reply}<br><button class='chals-form-shortcut-btn' onclick='openAndScrollToForm()'>Start Form Now</button>`;
+          area.appendChild(botDiv);
+          area.scrollTop = area.scrollHeight;
+        }, 800);
       }
     </script>
   </body>
