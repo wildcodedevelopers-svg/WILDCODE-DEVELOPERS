@@ -55,7 +55,6 @@
         position: relative;
       }
 
-      /* Animated Laser Scan Line Overlay */
       .scanline-system {
         position: fixed;
         top: 0;
@@ -115,7 +114,6 @@
         max-width: 380px;
       }
 
-      /* Dark Luxury Glowing WhatsApp CTA */
       .hero-wa-btn {
         display: flex;
         align-items: center;
@@ -140,7 +138,6 @@
         box-shadow: 0 0 25px rgba(0, 255, 204, 0.6), inset 0 0 15px rgba(0, 255, 204, 0.2); 
       }
       
-      /* Active state transforms background completely green */
       .hero-wa-btn:active { 
         transform: scale(0.98); 
         background: #1ea94b; 
@@ -377,7 +374,7 @@
         pointer-events: auto;
         display: inline-block;
         text-transform: uppercase;
-        transition: transform 0.3s elements, box-shadow 0.3s;
+        transition: transform 0.3s, box-shadow 0.3s;
       }
       #formToggleBtn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 255, 204, 0.45); }
 
@@ -414,7 +411,7 @@
 
       .direct-contact-action-link { color: var(--accent) !important; text-decoration: underline !important; font-weight: bold !important; display: inline-block; }
 
-      /* Action Dock Layouts */
+      /* Action Dock Layout System */
       .action-dock-container {
         position: fixed;
         bottom: 30px;
@@ -422,7 +419,14 @@
         display: flex;
         flex-direction: column;
         gap: 16px;
-        z-index: 2147483647;
+        z-index: 100;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s;
+      }
+
+      .action-dock-container.hidden-dock {
+        transform: translateY(180px);
+        opacity: 0;
+        pointer-events: none;
       }
 
       .glow-action-btn {
@@ -446,7 +450,6 @@
 
       .glow-action-btn:hover { transform: scale(1.08) translateY(-2px); background-color: #0d1527; }
 
-      /* Reconstructed Ask Chals Floating Branding Hook */
       .ai-glow-btn { 
         width: auto;
         padding: 0 16px;
@@ -478,7 +481,7 @@
         border: 1px solid rgba(0, 255, 204, 0.3);
         border-radius: 24px;
         box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), 0 0 40px rgba(0, 85, 255, 0.1);
-        z-index: 2147483645;
+        z-index: 99999;
         display: flex;
         flex-direction: column;
         overflow: hidden;
@@ -498,7 +501,7 @@
         background: rgba(2, 4, 10, 0.65);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
-        z-index: 2147483644;
+        z-index: 99990;
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s;
@@ -548,11 +551,11 @@
       .chals-suggest-chip { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted); padding: 10px 16px; border-radius: 20px; font-size: 0.88rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; text-align: left; }
       .chals-suggest-chip:hover { background: rgba(0, 85, 255, 0.1); border-color: var(--primary); color: #fff; }
 
-      .chals-input-bar { border-top: 1px solid rgba(255, 255, 255, 0.04); padding: 14px 20px; display: flex; gap: 10px; background: #040814; align-items: center; }
+      .chals-input-bar { border-top: 1px solid rgba(255, 255, 255, 0.04); padding: 14px 20px; display: flex; gap: 10px; background: #040814; align-items: center; position: relative; z-index: 10; }
       .chals-input-bar input { flex: 1; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px 16px; color: #fff; font-size: 0.98rem; font-family: var(--font-sans); }
       .chals-input-bar input:focus { outline: none; border-color: var(--primary); }
       
-      .chals-send-btn { background: rgba(255, 255, 255, 0.04); border: none; color: var(--text-muted); width: 46px; height: 46px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+      .chals-send-btn { background: rgba(255, 255, 255, 0.04); border: none; color: var(--text-muted); width: 46px; height: 46px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; pointer-events: auto; }
       .chals-send-btn.active-input { background: var(--primary); color: #fff; box-shadow: 0 4px 12px rgba(0, 85, 255, 0.3); }
       .chals-send-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
@@ -577,6 +580,8 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
         box-shadow: 0 4px 12px rgba(0, 255, 204, 0.2);
+        border: none;
+        cursor: pointer;
       }
 
       footer {
@@ -924,7 +929,7 @@
 
     <div class="chals-screen-blur-overlay" id="chalsBlurOverlay" onclick="toggleChalsChat()"></div>
 
-    <div class="action-dock-container">
+    <div class="action-dock-container" id="actionDock">
       <button class="glow-action-btn ai-glow-btn" onclick="toggleChalsChat()" title="Ask Chals AI">
         <span>ASK CHALS</span>
       </button>
@@ -1002,8 +1007,16 @@
       function toggleChalsChat() {
         const win = document.getElementById("chalsWindow");
         const overlay = document.getElementById("chalsBlurOverlay");
+        const dock = document.getElementById("actionDock");
+        
         win.classList.toggle("open");
         overlay.classList.toggle("active");
+        
+        if (win.classList.contains("open")) {
+          dock.classList.add("hidden-dock");
+        } else {
+          dock.classList.remove("hidden-dock");
+        }
       }
 
       function evaluateInputState() {
@@ -1032,6 +1045,7 @@
 
         const area = document.getElementById("chalsMsgArea");
         
+        // Render user message bubble
         const userDiv = document.createElement("div");
         userDiv.className = "chals-msg user";
         userDiv.textContent = query;
@@ -1041,21 +1055,83 @@
         evaluateInputState();
         area.scrollTop = area.scrollHeight;
 
+        // Add natural typing delay
         setTimeout(() => {
           const botDiv = document.createElement("div");
           botDiv.className = "chals-msg bot";
           
-          let reply = "Got it! Let's build your project. You can lock in a direct consultation with Wayne right now by clicking below:";
-          if(query.toLowerCase().includes("cost") || query.toLowerCase().includes("budget") || query.toLowerCase().includes("much")) {
-            reply = "WildCode pricing is fully customized depending on project size and goals. Our budget ranges usually start anywhere from under $300 up to $3000+. Let's talk details via the main form!";
-          } else if(query.toLowerCase().includes("long") || query.toLowerCase().includes("time")) {
-            reply = "Most premium setups are completely ready and active within 3 to 7 business days depending on how quickly content milestones are completed.";
+          const cleanQuery = query.toLowerCase().trim();
+          let reply = "";
+          let showShortcutButton = false; // Form button is hidden by default now
+
+          // Intent-Based Context Dictionary Matrix
+          const intents = [
+            {
+              keywords: [/hi\b/, /hello\b/, /hey\b/, /greetings/, /yo\b/, /morning/, /afternoon/],
+              response: "Hey there! Welcome to WildCode. I'm Chals, your technical assistant. What kind of project are we looking to build or optimize today?",
+              showButton: false
+            },
+            {
+              keywords: [/cost/, /price/, /pricing/, /much/, /quote/, /zar/, /usd/, /rate/, /cheap/, /expensive/],
+              response: "WildCode skips agency markup. Every project is priced based on exact complexity and performance targets. High-converting landing pages and business sites typically run from **under $300 (roughly R5,500+) up to custom scale web applications**. If you want a precise quote for your specific features, launching our brief planner is the best next step.",
+              showButton: true
+            },
+            {
+              keywords: [/long/, /time/, /duration/, /days/, /weeks/, /turnaround/, /deadline/, /fast/],
+              response: "We don't drag deadlines out. A standard professional business launch or layout optimization cycle takes **3 to 7 business days** flat. This depends purely on how fast we clear content milestones and finalize project requirements.",
+              showButton: true
+            },
+            {
+              keywords: [/services/, /offer/, /do you do/, /build/, /what do/, /stack/, /dev/, /work/],
+              response: "We engineer high-performance web systems: conversion-focused landing pages, corporate portfolios, responsive mobile layouts, and fully custom web platforms. Everything is custom-coded—no slow, generic templates allowed here.",
+              showButton: false
+            },
+            {
+              keywords: [/own\b/, /ownership/, /rights/, /code/, /github/],
+              response: "You retain **100% full legal ownership** of your complete code architecture, assets, and configurations from day one. No vendor lock-in traps, no ongoing licensing fees. Your site belongs completely to your business.",
+              showButton: false
+            },
+            {
+              keywords: [/seo/, /google/, /search/, /rank/, /traffic/, /optimize/],
+              response: "Core technical SEO is built directly into the foundation of every site. Out of the box, you get strict semantic HTML structure, compressed assets for lightning-fast loading speeds, optimized mobile viewports, and clean metadata configurations to maximize crawling efficiency on Google.",
+              showButton: false
+            },
+            {
+              keywords: [/start/, /begin/, /hire/, /book/, /order/, /sign up/],
+              response: "Awesome! To get the build initialized, we just need to grab a few basic details about your business goals and budget range so we can structure your layout roadmap.",
+              showButton: true
+            },
+            {
+              keywords: [/thank/, /thanks/, /awesome/, /great/, /cool/, /ok/, /okay/],
+              response: "Absolutely! Let me know if you have any other questions. I'm here whenever you're ready to break down your next build.",
+              showButton: false
+            }
+          ];
+
+          // Evaluate incoming text against intents
+          let matchedIntent = intents.find(intent => 
+            intent.keywords.some(regex => regex.test(cleanQuery))
+          );
+
+          if (matchedIntent) {
+            reply = matchedIntent.response;
+            showShortcutButton = matchedIntent.showButton;
+          } else {
+            // Dynamic conversational fallback text if no keyword matches
+            reply = "Got it. I want to make sure I give you an accurate answer. Could you clarify if you're asking about our pricing, timelines, services, or how to kick off a new project build?";
+            showShortcutButton = false;
           }
 
-          botDiv.innerHTML = `${reply}<br><button class='chals-form-shortcut-btn' onclick='openAndScrollToForm()'>Start Form Now</button>`;
+          // Append the message structure cleanly
+          if (showShortcutButton) {
+            botDiv.innerHTML = `${reply}<br><button class='chals-form-shortcut-btn' onclick='openAndScrollToForm()'>Start Project Form</button>`;
+          } else {
+            botDiv.innerHTML = reply;
+          }
+
           area.appendChild(botDiv);
           area.scrollTop = area.scrollHeight;
-        }, 800);
+        }, 550);
       }
     </script>
   </body>
