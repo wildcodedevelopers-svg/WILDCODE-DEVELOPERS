@@ -22,7 +22,7 @@
     <style>
       :root {
         --bg-dark: #02040a;
-        --card-bg: rgba(6, 11, 25, 0.75);
+        --card-bg: rgba(6, 11, 25, 0.65);
         --primary: #0055ff;
         --primary-glow: rgba(0, 85, 255, 0.4);
         --accent: #00ffcc;
@@ -41,15 +41,6 @@
 
       body {
         background-color: var(--bg-dark);
-        /* Premium deep-tech gradient background with a clean vector grid pattern */
-        background-image: 
-          radial-gradient(circle at 50% 0%, rgba(0, 85, 255, 0.15), transparent 50%),
-          radial-gradient(circle at 0% 100%, rgba(0, 255, 204, 0.05), transparent 40%),
-          linear-gradient(to bottom, rgba(2, 4, 10, 0.8), var(--bg-dark)),
-          linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-        background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-        background-attachment: fixed;
         color: var(--text-main);
         font-family: var(--font-sans);
         line-height: 1.75;
@@ -58,6 +49,58 @@
         margin: 0 auto;
         overflow-x: hidden;
         position: relative;
+      }
+
+      /* Animated Loop Background System */
+      .bg-matrix-loop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+        overflow: hidden;
+        background: var(--bg-dark);
+        pointer-events: none;
+      }
+
+      .bg-matrix-loop::before {
+        content: '';
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        top: -50%;
+        left: -50%;
+        background-image: 
+          linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+        background-size: 50px 50px;
+        transform: rotate(15deg);
+        animation: gridLoop 24s linear infinite;
+      }
+
+      .bg-matrix-loop::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+          radial-gradient(circle at 20% 30%, rgba(0, 85, 255, 0.15), transparent 40%),
+          radial-gradient(circle at 80% 70%, rgba(0, 255, 204, 0.1), transparent 45%),
+          radial-gradient(circle at 50% 50%, rgba(2, 4, 10, 0.2), var(--bg-dark));
+        animation: glowLoop 12s ease-in-out infinite alternate;
+      }
+
+      @keyframes gridLoop {
+        0% { transform: rotate(15deg) translateY(0); }
+        100% { transform: rotate(15deg) translateY(50px); }
+      }
+
+      @keyframes glowLoop {
+        0% { filter: hue-rotate(0deg) brightness(1); }
+        100% { filter: hue-rotate(45deg) brightness(1.2); }
       }
 
       .hero-section {
@@ -80,14 +123,8 @@
       }
 
       @keyframes colorShift {
-        0% {
-          color: var(--accent);
-          text-shadow: 0 0 30px var(--accent-glow);
-        }
-        100% {
-          color: var(--primary);
-          text-shadow: 0 0 30px var(--primary-glow);
-        }
+        0% { color: var(--accent); text-shadow: 0 0 30px var(--accent-glow); }
+        100% { color: var(--primary); text-shadow: 0 0 30px var(--primary-glow); }
       }
 
       .hero-cta-box {
@@ -115,15 +152,8 @@
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
 
-      .hero-wa-btn:active {
-        transform: scale(0.98);
-      }
-
-      .hero-wa-btn svg {
-        width: 24px;
-        height: 24px;
-        fill: currentColor;
-      }
+      .hero-wa-btn:active { transform: scale(0.98); }
+      .hero-wa-btn svg { width: 24px; height: 24px; fill: currentColor; }
 
       .hero-trust-badges {
         display: flex;
@@ -146,10 +176,7 @@
         gap: 8px;
       }
 
-      .trust-badge-item span {
-        color: #ffffff;
-        text-shadow: 0 0 10px var(--accent-glow);
-      }
+      .trust-badge-item span { color: #ffffff; text-shadow: 0 0 10px var(--accent-glow); }
 
       .section-card {
         background: var(--card-bg);
@@ -181,11 +208,6 @@
         filter: drop-shadow(0 0 30px rgba(0, 85, 255, 0.3));
       }
 
-      h1 {
-        font-family: var(--font-display);
-        color: #ffffff;
-      }
-
       h2 {
         font-family: var(--font-display);
         color: var(--accent);
@@ -201,11 +223,7 @@
         gap: 12px;
       }
 
-      h2::before {
-        content: '//';
-        color: var(--primary);
-        font-family: var(--font-display);
-      }
+      h2::before { content: '//'; color: var(--primary); font-family: var(--font-display); }
       
       h3 { 
         font-family: var(--font-display);
@@ -228,30 +246,10 @@
         box-shadow: 0 0 10px var(--primary-glow);
       }
 
-      h4 { 
-        font-family: var(--font-display);
-        color: var(--accent);
-        font-size: 1.4rem; 
-        margin-top: 30px;
-        margin-bottom: 20px;
-      }
-
-      p {
-        margin-bottom: 20px;
-        color: var(--text-muted);
-        font-size: clamp(1.05rem, 2.8vw, 1.15rem);
-      }
-      
-      b, strong {
-        color: #ffffff;
-      }
-
-      hr {
-        border: 0;
-        height: 1px;
-        background: linear-gradient(to right, transparent, var(--primary), var(--accent), var(--primary), transparent);
-        margin: 40px 0;
-      }
+      h4 { font-family: var(--font-display); color: var(--accent); font-size: 1.4rem; margin-top: 30px; margin-bottom: 20px; }
+      p { margin-bottom: 20px; color: var(--text-muted); font-size: clamp(1.05rem, 2.8vw, 1.15rem); }
+      b, strong { color: #ffffff; }
+      hr { border: 0; height: 1px; background: linear-gradient(to right, transparent, var(--primary), var(--accent), var(--primary), transparent); margin: 40px 0; }
 
       .img-wrapper {
         position: relative;
@@ -264,12 +262,7 @@
         width: 100%;
       }
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
+      img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
       .services-group .service-block {
         background: rgba(255, 255, 255, 0.01);
@@ -299,86 +292,19 @@
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
       }
 
-      .feature-item span {
-        color: var(--accent);
-        margin-right: 14px;
-        font-size: 1.4rem;
-        text-shadow: 0 0 12px var(--accent-glow);
-      }
+      .feature-item span { color: var(--accent); margin-right: 14px; font-size: 1.4rem; text-shadow: 0 0 12px var(--accent-glow); }
 
-      .project-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
-        gap: 25px;
-        list-style: none;
-      }
-      
-      .project-card {
-        background: rgba(255, 255, 255, 0.01);
-        border: 1px solid rgba(255, 255, 255, 0.04);
-        padding: 20px;
-        border-radius: 18px;
-        display: flex;
-        flex-direction: column;
-      }
+      .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 25px; list-style: none; }
+      .project-card { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.04); padding: 20px; border-radius: 18px; display: flex; flex-direction: column; }
+      .project-card b { font-family: var(--font-display); font-size: 1.3rem; color: var(--accent); display: block; margin-bottom: 12px; letter-spacing: 0.5px; }
 
-      .project-card b {
-        font-family: var(--font-display);
-        font-size: 1.3rem;
-        color: var(--accent);
-        display: block;
-        margin-bottom: 12px;
-        letter-spacing: 0.5px;
-      }
-
-      .profile-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-        gap: 24px;
-      }
-
-      .profile-card {
-        background: rgba(6, 11, 25, 0.8);
-        border: 1px solid rgba(0, 85, 255, 0.15);
-        border-left: 4px solid var(--accent);
-        padding: 24px;
-        border-radius: 16px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .profile-card h3 {
-        margin-top: 0;
-        color: var(--accent);
-        font-size: 1.2rem;
-        letter-spacing: 0.5px;
-        margin-bottom: 15px;
-      }
-
-      .profile-card h3::before {
-        display: none;
-      }
-
-      .profile-metric-list {
-        list-style: none;
-        margin-top: 10px;
-        margin-bottom: 20px;
-      }
-
-      .profile-metric-list li {
-        margin-bottom: 8px;
-        color: var(--text-main);
-        font-size: 1.05rem;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .profile-metric-list li span {
-        color: var(--accent);
-        font-weight: bold;
-      }
+      .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 24px; }
+      .profile-card { background: rgba(6, 11, 25, 0.8); border: 1px solid rgba(0, 85, 255, 0.15); border-left: 4px solid var(--accent); padding: 24px; border-radius: 16px; display: flex; flex-direction: column; justify-content: space-between; }
+      .profile-card h3 { margin-top: 0; color: var(--accent); font-size: 1.2rem; letter-spacing: 0.5px; margin-bottom: 15px; }
+      .profile-card h3::before { display: none; }
+      .profile-metric-list { list-style: none; margin-top: 10px; margin-bottom: 20px; }
+      .profile-metric-list li { margin-bottom: 8px; color: var(--text-main); font-size: 1.05rem; display: flex; align-items: center; gap: 10px; }
+      .profile-metric-list li span { color: var(--accent); font-weight: bold; }
 
       .project-link-btn {
         display: inline-flex;
@@ -398,107 +324,21 @@
         text-transform: uppercase;
       }
 
-      .testimonial-box {
-        background: rgba(0, 255, 204, 0.03);
-        border: 1px dashed rgba(0, 255, 204, 0.2);
-        padding: 16px;
-        border-radius: 12px;
-        margin-top: 20px;
-        position: relative;
-      }
+      .testimonial-box { background: rgba(0, 255, 204, 0.03); border: 1px dashed rgba(0, 255, 204, 0.2); padding: 16px; border-radius: 12px; margin-top: 20px; position: relative; }
+      .testimonial-text { font-style: italic; color: var(--text-main); font-size: 1rem; margin-bottom: 8px; line-height: 1.6; }
+      .testimonial-author { font-family: var(--font-display); font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; display: block; text-align: right; font-weight: 700; }
 
-      .testimonial-text {
-        font-style: italic;
-        color: var(--text-main);
-        font-size: 1rem;
-        margin-bottom: 8px;
-        line-height: 1.6;
-      }
+      .faq-wrapper { display: flex; flex-direction: column; gap: 12px; }
+      .faq-item { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; overflow: hidden; }
+      .faq-trigger { width: 100%; background: none; border: none; padding: 20px; text-align: left; color: #ffffff; font-family: var(--font-sans); font-size: clamp(1.05rem, 2.8vw, 1.15rem); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+      .faq-icon { display: inline-block; width: 10px; height: 10px; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(45deg); transition: transform 0.2s ease; margin-right: 5px; flex-shrink: 0; }
+      .faq-item.active .faq-icon { transform: rotate(-135deg); }
+      .faq-content { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.25s ease; }
+      .faq-item.active .faq-content { grid-template-rows: 1fr; }
+      .faq-interior { overflow: hidden; }
+      .faq-answer { padding: 0 20px 20px 20px; color: var(--text-muted); margin: 0; font-size: clamp(1rem, 2.5vw, 1.1rem); }
 
-      .testimonial-author {
-        font-family: var(--font-display);
-        font-size: 0.85rem;
-        color: var(--accent);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        display: block;
-        text-align: right;
-        font-weight: 700;
-      }
-
-      .faq-wrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .faq-item {
-        background: rgba(255, 255, 255, 0.01);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        overflow: hidden;
-      }
-
-      .faq-trigger {
-        width: 100%;
-        background: none;
-        border: none;
-        padding: 20px;
-        text-align: left;
-        color: #ffffff;
-        font-family: var(--font-sans);
-        font-size: clamp(1.05rem, 2.8vw, 1.15rem);
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 15px;
-      }
-
-      .faq-icon {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        border-right: 2px solid var(--accent);
-        border-bottom: 2px solid var(--accent);
-        transform: rotate(45deg);
-        transition: transform 0.2s ease;
-        margin-right: 5px;
-        flex-shrink: 0;
-      }
-
-      .faq-item.active .faq-icon {
-        transform: rotate(-135deg);
-      }
-
-      .faq-content {
-        display: grid;
-        grid-template-rows: 0fr;
-        transition: grid-template-rows 0.25s ease;
-      }
-
-      .faq-item.active .faq-content {
-        grid-template-rows: 1fr;
-      }
-
-      .faq-interior {
-        overflow: hidden;
-      }
-
-      .faq-answer {
-        padding: 0 20px 20px 20px;
-        color: var(--text-muted);
-        margin: 0;
-        font-size: clamp(1rem, 2.5vw, 1.1rem);
-      }
-
-      .cta-wrapper {
-        text-align: center;
-        padding: 20px 0;
-        position: relative;
-        z-index: 20;
-      }
+      .cta-wrapper { text-align: center; padding: 20px 0; position: relative; z-index: 20; }
 
       #formToggleBtn {
         font-family: var(--font-display);
@@ -521,31 +361,10 @@
         text-transform: uppercase;
       }
 
-      #projectFormContainer {
-        display: none;
-        background: #050b18;
-        border: 1px solid var(--accent);
-        padding: clamp(22px, 4.5vw, 40px);
-        border-radius: 20px;
-        margin: 25px 0;
-        position: relative;
-        z-index: 25;
-      }
-
-      .form-grid-layout {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-        gap: 0 20px;
-      }
-
-      #projectFormContainer label {
-        display: block;
-        margin-bottom: 10px;
-        color: #ffffff;
-        font-weight: 600;
-        font-size: 1.05rem;
-      }
-
+      #projectFormContainer { display: none; background: #050b18; border: 1px solid var(--accent); padding: clamp(22px, 4.5vw, 40px); border-radius: 20px; margin: 25px 0; position: relative; z-index: 25; }
+      .form-grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 0 20px; }
+      #projectFormContainer label { display: block; margin-bottom: 10px; color: #ffffff; font-weight: 600; font-size: 1.05rem; }
+      
       #projectFormContainer input, 
       #projectFormContainer select,
       #projectFormContainer textarea {
@@ -570,33 +389,12 @@
         padding-right: 45px;
       }
 
-      #projectFormContainer select option {
-        background: #050b18;
-        color: #fff;
-      }
+      #projectFormContainer select option { background: #050b18; color: #fff; }
+      #projectFormContainer button[type="submit"] { font-family: var(--font-display); background: var(--accent); color: var(--bg-dark); border: none; padding: 18px 35px; font-size: 1.15rem; font-weight: 700; border-radius: 10px; cursor: pointer; width: 100%; letter-spacing: 0.5px; text-transform: uppercase; }
 
-      #projectFormContainer button[type="submit"] {
-        font-family: var(--font-display);
-        background: var(--accent);
-        color: var(--bg-dark);
-        border: none;
-        padding: 18px 35px;
-        font-size: 1.15rem;
-        font-weight: 700;
-        border-radius: 10px;
-        cursor: pointer;
-        width: 100%;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-      }
+      .direct-contact-action-link { color: var(--accent) !important; text-decoration: underline !important; font-weight: bold !important; display: inline-block; }
 
-      .direct-contact-action-link {
-        color: var(--accent) !important;
-        text-decoration: underline !important;
-        font-weight: bold !important;
-        display: inline-block;
-      }
-
+      /* Comm Dock System */
       .comm-dock {
         position: fixed !important;
         bottom: 24px !important;
@@ -610,28 +408,18 @@
         display: flex !important;
         align-items: center !important;
         gap: 20px !important;
-        z-index: 2147483647 !important;
+        z-index: 2147483643 !important;
         border-radius: 100px !important;
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95) !important;
         width: calc(100% - 24px) !important;
         max-width: 400px !important;
         justify-content: space-between !important;
+        transition: left 0.3s ease, transform 0.3s ease;
       }
 
-      .comm-dock-label {
-        font-family: var(--font-display);
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--accent);
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
-
-      .comm-icons-group {
-        display: flex;
-        gap: 14px;
-      }
-
+      .comm-dock-label { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
+      .comm-icons-group { display: flex; gap: 14px; }
+      
       .comm-btn-icon {
         display: flex !important;
         align-items: center !important;
@@ -644,14 +432,190 @@
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       }
 
-      .comm-btn-icon svg {
-        width: 24px !important;
-        height: 24px !important;
-        fill: currentColor !important;
-      }
-
+      .comm-btn-icon svg { width: 24px !important; height: 24px !important; fill: currentColor !important; }
       .icon-whatsapp { background-color: #1ea94b !important; }
       .icon-call { background-color: #004fe5 !important; }
+
+      /* Chals Application Overlay Card Layout - Centered Configuration */
+      .chals-toggle-container {
+        position: fixed;
+        bottom: 100px;
+        right: 24px;
+        z-index: 2147483646;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .chals-toggle-label-btn {
+        background: rgba(6, 11, 25, 0.9);
+        border: 1px solid rgba(0, 255, 204, 0.3);
+        font-family: var(--font-display);
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        transition: all 0.2s ease;
+      }
+
+      .chals-toggle-circle-btn {
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        box-shadow: 0 0 20px var(--primary-glow), 0 5px 15px rgba(0, 0, 0, 0.4);
+        transition: transform 0.2s ease;
+      }
+      
+      .chals-toggle-circle-btn:active { transform: scale(0.92); }
+      .chals-toggle-circle-btn svg { width: 26px; height: 26px; fill: currentColor; }
+
+      /* Chals Layout Shifted Directly to the Middle of the Screen */
+      .chals-chat-window {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+        width: calc(100% - 32px);
+        max-width: 460px;
+        height: 600px;
+        background: #040814;
+        border: 1px solid rgba(0, 255, 204, 0.3);
+        border-radius: 24px;
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), 0 0 40px rgba(0, 85, 255, 0.1);
+        z-index: 2147483645;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.3s;
+      }
+      
+      .chals-chat-window.open {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Dimmer Blur Overlay Background when Chals Mid-Screen is Activated */
+      .chals-screen-blur-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(2, 4, 10, 0.6);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 2147483644;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s;
+      }
+
+      .chals-screen-blur-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .chals-header {
+        background: linear-gradient(to bottom, rgba(0, 85, 255, 0.15), transparent);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        position: relative;
+      }
+
+      .chals-header-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--accent), var(--primary));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        box-shadow: 0 0 12px var(--accent-glow);
+      }
+      .chals-header-avatar svg { width: 20px; height: 20px; fill: #040814; }
+
+      .chals-header-info { flex: 1; }
+      .chals-header-title { font-family: var(--font-display); font-weight: 700; color: #ffffff; letter-spacing: 0.5px; font-size: 1.15rem; display: block; }
+      .chals-header-status { font-size: 0.85rem; color: var(--accent); display: flex; align-items: center; gap: 5px; font-weight: 600; }
+      .chals-header-status::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); }
+
+      .chals-close-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.75rem; display: flex; align-items: center; line-height: 1; }
+      .chals-close-btn:hover { color: #fff; }
+
+      .chals-messages-area { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background: #030611; }
+      
+      .chals-msg { max-width: 85%; padding: 14px 18px; border-radius: 18px; font-size: 1rem; line-height: 1.5; word-wrap: break-word; }
+      .chals-msg.bot { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); color: var(--text-main); align-self: flex-start; border-top-left-radius: 4px; }
+      .chals-msg.user { background: var(--primary); color: #fff; align-self: flex-end; border-top-right-radius: 4px; font-weight: 600; box-shadow: 0 4px 15px rgba(0, 85, 255, 0.25); }
+      .chals-msg a { color: var(--accent); font-weight: bold; text-decoration: underline; }
+
+      .chals-chips-container { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 20px; background: #030611; max-height: 130px; overflow-y: auto; }
+      .chals-suggest-chip { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted); padding: 10px 16px; border-radius: 20px; font-size: 0.88rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; text-align: left; }
+      .chals-suggest-chip:hover { background: rgba(0, 85, 255, 0.1); border-color: var(--primary); color: #fff; }
+
+      .chals-input-bar { border-top: 1px solid rgba(255, 255, 255, 0.04); padding: 14px 20px; display: flex; gap: 10px; background: #040814; align-items: center; }
+      .chals-input-bar input { flex: 1; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px 16px; color: #fff; font-size: 0.98rem; font-family: var(--font-sans); }
+      .chals-input-bar input:focus { outline: none; border-color: var(--primary); }
+      
+      .chals-send-btn { background: rgba(255, 255, 255, 0.04); border: none; color: var(--text-muted); width: 46px; height: 46px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+      .chals-send-btn.active-input { background: var(--primary); color: #fff; box-shadow: 0 4px 12px rgba(0, 85, 255, 0.3); }
+      .chals-send-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+      .chals-indicator { display: flex; gap: 5px; padding: 8px 4px; align-items: center; }
+      .chals-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: chalsBounce 1.4s infinite ease-in-out both; }
+      .chals-dot:nth-child(1) { animation-delay: -0.32s; }
+      .chals-dot:nth-child(2) { animation-delay: -0.16s; }
+
+      @keyframes chalsBounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
+
+      .chals-form-shortcut-btn {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: var(--bg-dark) !important;
+        font-family: var(--font-display);
+        font-weight: 700;
+        text-decoration: none !important;
+        padding: 10px 18px;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 12px rgba(0, 255, 204, 0.2);
+      }
+
+      footer {
+        text-align: center;
+        padding: 40px 20px 60px 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        margin-top: 50px;
+      }
+      .brand-signature { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: #fff; letter-spacing: 2px; margin-bottom: 10px; }
+      footer p { font-size: 0.95rem; margin-bottom: 5px; }
+
+      @media (max-width: 480px) {
+        .chals-chat-window { height: 80vh; width: calc(100% - 24px); }
+        .chals-toggle-container { right: 12px; bottom: 95px; }
+      }
 
       @media (min-width: 600px) {
         body { padding: 40px 20px 140px 20px; }
@@ -664,38 +628,22 @@
         .img-wrapper:hover img { transform: scale(1.02); }
         #formToggleBtn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 255, 204, 0.45); }
         .hero-wa-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(30, 169, 75, 0.5); }
-      }
-
-      footer {
-        text-align: center;
-        padding: 40px 0;
-        margin-top: 40px;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-      }
-      
-      footer p {
-        margin: 6px 0;
-        color: var(--text-muted);
-      }
-
-      footer .brand-signature {
-        font-family: var(--font-display);
-        color: #ffffff;
-        font-size: 1.2rem;
-        letter-spacing: 0.5px;
+        .chals-toggle-label-btn:hover { border-color: var(--accent); color: #fff; }
+        .chals-toggle-circle-btn:hover { transform: scale(1.05); }
       }
     </style>
   </head>
   <body>
+
+    <!-- Loop Grid Overlay Backer -->
+    <div class="bg-matrix-loop"></div>
     
     <div class="logo-container">
       <img src="https://i.ibb.co/SXh5dcm6/1782383862681.png" alt="WildCode Elite Systems Logo" width="650" height="216">
     </div>
 
     <div class="hero-section">
-      <h1 class="shifting-hero-text">
-        Build. Scale. Dominate.
-      </h1>
+      <h1 class="shifting-hero-text">Build. Scale. Dominate.</h1>
       <p style="text-align:center;max-width:700px;margin:auto;color:#94a3b8;font-size:clamp(1.1rem, 3vw, 1.25rem);">
         Professional websites designed to attract customers, build credibility, and help your business grow online.
       </p>
@@ -720,7 +668,7 @@
       <div class="img-wrapper">
         <img src="https://i.ibb.co/hRTKv85G/istockphoto-1435220822-612x612.jpg" alt="Production Lab">
       </div>
-      <p><b>WildCode</b> builds modern, high-performance websites for businesses, entrepreneurs, and creators. We combine clean design, fast performance, and mobile-friendly development to help brands build trust, attract customers, and grow online. Whether you need a business website, landing page, portfolio, or online store, we create digital experiences that look professional and deliver results.</p>
+      <p><b>WildCode</b> is an elite web development studio run by Mr W.C. Magwenzi, based in South Africa. We specialize in building modern, high-performance websites for businesses, entrepreneurs, and creators worldwide. We don't just build websites; we engineer digital experiences that convert. With a focus on pristine code, bold design, and uncompromising performance, WildCode delivers the technical excellence your brand deserves.</p>
     </div>
     
     <div class="section-card services-group">
@@ -1008,7 +956,7 @@
       <div class="comm-icons-group">
         <a href="https://wa.me/27612832392" class="comm-btn-icon icon-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
           <svg viewBox="0 0 24 24">
-            <path fill="currentColor" d="M12.004 2c-5.51 0-9.99 4.49-9.99 10 0 1.77.46 3.49 1.34 5.02L2 22l5.14-1.35c1.48.81 3.14 1.24 4.86 1.24 5.51 0 9.99-4.49 9.99-10S17.52 2 12.004 2zm3.86 14.22c-.21.58-1.21 1.13-1.67 1.19-.46.06-.9.1-3.04-.74-2.58-1.01-4.21-3.63-4.34-3.8-.13-.18-1.04-1.38-1.04-2.63 0-1.25.65-1.87.88-2.13.23-.26.5-.32.67-.32.17 0 .34.01.49.02.16.01.37-.06.58.45.22.54.75 1.83.82 1.96.07.13.11.29.02.48-.09.18-.14.3-.28.46-.14.16-.3.36-.43.49-.15.15-.31.31-.13.62.18.3.81 1.33 1.74 2.16.15.13.88.77 1.63.85.25.02.48-.02.66-.21.19-.2.82-.95 1.04-1.28.22-.33.44-.28.74-.17.3.11 1.91.9 2.24 1.06.33.16.55.24.63.38.08.14.08.8-.13 1.38z"/>
+            <path fill="currentColor" d="M12.004 2c-5.51 0-9.99 4.49-9.99 10 0 1.77.46 3.49 1.34 5.02L2 22l5.14-1.35c1.48.81 3.14 1.24 4.86 1.24 5.51 0 9.99-4.49 9.99-10S17.52 2 12.004 2zm3.86 14.22c-.21.58-1.21 1.13-1.67 1.19-.46.06-.9.1(3.04-.74-2.58-1.01-4.21-3.63-4.34-3.8-.13-.18-1.04-1.38-1.04-2.63 0-1.25.65-1.87.88-2.13.23-.26.5-.32.67-.32.17 0 .34.01.49.02.16.01.37-.06.58.45.22.54.75 1.83.82 1.96.07.13.11.29.02.48-.09.18-.14.3-.28.46-.14.16-.3.36-.43.49-.15.15-.31.31-.13.62.18.3.81 1.33 1.74 2.16.15.13.88.77 1.63.85.25.02.48-.02.66-.21.19-.2.82-.95 1.04-1.28.22-.33.44-.28.74-.17.3.11 1.91.9 2.24 1.06.33.16.55.24.63.38.08.14.08.8-.13 1.38z"/>
           </svg>
         </a>
         <a href="tel:+27612832392" class="comm-btn-icon icon-call" aria-label="Call">
@@ -1016,6 +964,56 @@
             <path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
           </svg>
         </a>
+      </div>
+    </div>
+
+    <!-- Background Dimming Overlay component for centered chat layout context -->
+    <div class="chals-screen-blur-overlay" id="chalsBlurOverlay" onclick="toggleChalsChat()"></div>
+
+    <!-- CHALS CHAT OVERLAY CARD -->
+    <div class="chals-toggle-container" id="chalsToggleGroup">
+      <button class="chals-toggle-label-btn" onclick="toggleChalsChat()">Ask Chals</button>
+      <button class="chals-toggle-circle-btn" onclick="toggleChalsChat()" aria-label="Toggle Chals">
+        <svg viewBox="0 0 24 24" id="chalsIconSvg">
+          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/>
+          <circle cx="8" cy="10" r="1.5"/><circle cx="12" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="chals-chat-window" id="chalsWindow">
+      <div class="chals-header">
+        <div class="chals-header-avatar">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+          </svg>
+        </div>
+        <div class="chals-header-info">
+          <span class="chals-header-title">CHALS</span>
+          <span class="chals-header-status">WildCode AI Assistant • Online</span>
+        </div>
+        <button class="chals-close-btn" onclick="toggleChalsChat()">&times;</button>
+      </div>
+      
+      <div class="chals-messages-area" id="chalsMsgArea">
+        <div class="chals-msg bot">
+          Hey! I'm **Chals** — WildCode's AI assistant. Ask me anything about our services, pricing, timelines, or how to get started! 🚀
+        </div>
+      </div>
+
+      <div class="chals-chips-container" id="chalsChips">
+        <button class="chals-suggest-chip" onclick="handleChipClick('How much does a website cost?')">How much does a website cost?</button>
+        <button class="chals-suggest-chip" onclick="handleChipClick('How long does it take?')">How long does it take?</button>
+        <button class="chals-suggest-chip" onclick="handleChipClick('What services do you offer?')">What services do you offer?</button>
+        <button class="chals-suggest-chip" onclick="handleChipClick('Do I own the website?')">Do I own the website?</button>
+        <button class="chals-suggest-chip" onclick="handleChipClick('Is SEO included?')">Is SEO included?</button>
+      </div>
+
+      <div class="chals-input-bar">
+        <input type="text" id="chalsInput" placeholder="Ask me anything..." onkeypress="handleChalsKey(event)" oninput="evaluateInputState()">
+        <button class="chals-send-btn" id="chalsSendBtn" onclick="sendChalsMessage()">
+          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
       </div>
     </div>
 
@@ -1035,6 +1033,127 @@
         const isHidden = formContainer.style.display === "none" || formContainer.style.display === "";
         formContainer.style.display = isHidden ? "block" : "none";
         if (isHidden) formContainer.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      function openAndScrollToForm() {
+        const formContainer = document.getElementById("projectFormContainer");
+        formContainer.style.display = "block";
+        formContainer.scrollIntoView({ behavior: 'smooth' });
+        
+        // Fully close the centered chat setup smoothly
+        toggleChalsChat();
+      }
+
+      /* ==========================================================================
+         CHALS CENTERED ENGINE WITH MATRIX FALLBACKS & SUBMIT INTERCEPTS
+         ========================================================================== */
+      const chalsKnowledge = [
+        { keys: ['how are you', 'how r u', 'how goes'], reply: "Operational matrices are functional and running at full capacity! 🤖 Thank you for asking. Ready to design, scale, and build your digital architecture. What details are we mapping out today? ✨" },
+        { keys: ['thanks', 'thank you', 'cool', 'awesome'], reply: "You're welcome! 😊 If you have any other questions, I'm right here. Ready to start your project? Reach Wayne on WhatsApp:\n[wa.me/27612832392](https://wa.me/27612832392) 💬" },
+        { keys: ['bye', 'goodbye', 'bye chals', 'exit'], reply: "Thanks for chatting! 👋 When you're ready to build something great, Wayne is just a message away. 🚀 Good luck!" },
+        { keys: ['hello', 'hi', 'hey'], reply: "Hello! Welcome to the main operational portal. 👋 I can walk you through pricing parameters, project deployment velocities, or layout strategies. What are we building? 🛠️" },
+        
+        { keys: ['who is wildcode', 'who is wayne', 'wildcode founder'], reply: "Great question! That's something best answered by Wayne directly. 👨‍💻 You can reach him on WhatsApp at [wa.me/27612832392](https://wa.me/27612832392) or email wildcoderobotics@gmail.com — he'll get back to you quickly! ⚡" },
+        
+        // Form link shortcut system
+        { keys: ['want a website', 'want website', 'buy website', 'need a website', 'build a website', 'get website', 'order website', 'website please'], reply: "Awesome! We are ready to build a high-performance system for you. 🔥 To lock in your spot and get started, please fill out our project request form right now! 📋👇\n\n<a href='#' class='chals-form-shortcut-btn' onclick='openAndScrollToForm(); return false;'>Click to Fill Project Form</a>" },
+
+        { keys: ['how much', 'cost', 'pricing', 'price'], reply: "Every project is highly unique! 💎 We provide clear, customized quotes matching your business goals. Our baseline brackets range from budget configurations under $300 up to comprehensive $3000+ complex business architectures. Tap **START YOUR PROJECT** to fetch an exact quote! 📊" },
+        { keys: ['how long', 'long does it take', 'timeline', 'days'], reply: "Most websites are delivered within **3–7 business days** from the time we receive your content (logo, text, images). ⏱️ Larger or more complex projects may take a bit longer. Need something urgently? Just mention it when you reach out! 🚀" },
+        { keys: ['services', 'what services', 'offer'], reply: "We build premium Business Websites, high-converting Landing Pages, E-commerce Stores, and custom portfolio hubs. 💻 All configurations are engineered to run lighting fast and mobile responsive. ⚡" },
+        { keys: ['own the website', 'do i own'], reply: "Yes, 100%. 🔑 Once the project is completed and final payment is made, full ownership of the website code, assets, and content belongs entirely to you. 🤝" },
+        { keys: ['seo', 'included'], reply: "Yes! 📈 All WildCode sites are built with SEO-ready structures, high-speed performance optimization, clean semantic HTML tag hierarchies, and metadata configured to help you rank on search engines. 🎯" }
+      ];
+
+      function toggleChalsChat() {
+        const chatWindow = document.getElementById('chalsWindow');
+        const blurOverlay = document.getElementById('chalsBlurOverlay');
+        const iconSvg = document.getElementById('chalsIconSvg');
+        const isOpen = chatWindow.classList.contains('open');
+        
+        if (isOpen) {
+          chatWindow.classList.remove('open');
+          blurOverlay.classList.remove('active');
+          iconSvg.innerHTML = '<path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><circle cx="8" cy="10" r="1.5"/><circle cx="12" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/>';
+        } else {
+          chatWindow.classList.add('open');
+          blurOverlay.classList.add('active');
+          iconSvg.innerHTML = '<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>';
+          const area = document.getElementById('chalsMsgArea');
+          area.scrollTop = area.scrollHeight;
+        }
+      }
+
+      function evaluateInputState() {
+        const input = document.getElementById('chalsInput');
+        const sendBtn = document.getElementById('chalsSendBtn');
+        if (input.value.trim().length > 0) {
+          sendBtn.classList.add('active-input');
+        } else {
+          sendBtn.classList.remove('active-input');
+        }
+      }
+
+      function handleChipClick(text) {
+        addMessage(text, 'user');
+        processChalsReply(text);
+      }
+
+      function handleChalsKey(e) {
+        if (e.key === 'Enter') sendChalsMessage();
+      }
+
+      function sendChalsMessage() {
+        const input = document.getElementById('chalsInput');
+        const text = input.value.trim();
+        if (!text) return;
+        
+        addMessage(text, 'user');
+        input.value = '';
+        evaluateInputState();
+        processChalsReply(text);
+      }
+
+      function addMessage(text, sender) {
+        const area = document.getElementById('chalsMsgArea');
+        const msg = document.createElement('div');
+        msg.className = `chals-msg ${sender}`;
+        
+        let processedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        processedText = processedText.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+        
+        msg.innerHTML = processedText;
+        area.appendChild(msg);
+        area.scrollTop = area.scrollHeight;
+        return msg;
+      }
+
+      function processChalsReply(query) {
+        const area = document.getElementById('chalsMsgArea');
+        const cleanQuery = query.toLowerCase();
+        
+        const indicator = document.createElement('div');
+        indicator.className = 'chals-msg bot chals-indicator';
+        indicator.innerHTML = '<div class="chals-dot"></div><div class="chals-dot"></div><div class="chals-dot"></div>';
+        area.appendChild(indicator);
+        area.scrollTop = area.scrollHeight;
+
+        // Custom unmatched question routing with fallback contact structures & emoticons
+        let finalReply = "Hmm, I don't recognize that question! 🤔 Please direct this inquiry to **Wayne** directly so he can help you build exactly what you need. 🚀\n\n📞 **Phone/WhatsApp:** [+27 612832392](https://wa.me/27612832392)\n✉️ **Email:** wildcoderobotics@gmail.com";
+        let found = false;
+
+        for (const item of chalsKnowledge) {
+          if (item.keys.some(k => cleanQuery.includes(k))) {
+            finalReply = item.reply;
+            found = true;
+            break;
+          }
+        }
+
+        setTimeout(() => {
+          indicator.remove();
+          addMessage(finalReply, 'bot');
+        }, 750);
       }
     </script>
   </body>
